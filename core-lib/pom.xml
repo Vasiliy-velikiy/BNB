@@ -25,6 +25,8 @@
 	</dependencies>
 
 	<build>
+		<testSourceDirectory>src/main/tests</testSourceDirectory>
+
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
