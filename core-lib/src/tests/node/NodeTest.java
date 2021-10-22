@@ -2,7 +2,7 @@ package tests.node;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class NodeTest {
+public class NodeTest {
 
     private final List<Integer> transposition=Arrays.asList(1,2,3,4,5,6,7,8,9,0);
     private final Node instance=new  Node(0,1,transposition);
