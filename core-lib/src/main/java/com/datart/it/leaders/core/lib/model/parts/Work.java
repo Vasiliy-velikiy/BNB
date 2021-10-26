@@ -1,9 +1,8 @@
-
 package com.datart.it.leaders.core.lib.model.parts;
-//объект произовдственной линии
-public class Work{
-   private int line; //линия
-   private int time ;//время обработки
+
+public class Work {
+    private int line; //линия
+    private int time ;//время обработки
 
 
     public int getLine() {
