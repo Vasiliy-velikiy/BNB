@@ -9,14 +9,37 @@ import org.junit.rules.ExpectedException;
 import org.mockito.internal.matchers.Null;
 
 
-import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
-
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 class NodeTest {
 
+    //пример теста
+    @Test
+    void forkOK() {
+        Node node=new Node();
+        List arr = Arrays.stream(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 0})
+                .boxed()
+                .collect(Collectors.toList());
+        node.setLinkedListList(arr);
+        node.setIndicatorOne(0);
+        node.setIndicatorTwo(2);
+        Node newNode=node.fork();
+        assertEquals(newNode.getIndicatorOne(),1);
+        assertEquals(newNode.getIndicatorTwo(),2);
+        arr = Arrays.stream(new int[]{1, 3, 2, 4, 5, 6, 7, 8, 9, 0})
+                .boxed()
+                .collect(Collectors.toList());
+        assertEquals(newNode.getLinkedListList(),arr);
+    }
+
+
+
+    //я так и не понял что ты тут тестируешь? Нода из одного элемента проверяем что элемент не изменился после fork???
+    //так он и не мог изменится!
     @Test
     void fork1() {
         Node node=new Node(123456);
@@ -26,10 +49,13 @@ class NodeTest {
 
         LinkedList expected=newNode1.getLinkedListList();
         System.out.println(expected.toString());
-        Assert.assertEquals(expected,actual);
+
+        assertEquals(expected,actual);
     }
     @Rule
 
+
+    //Вот это я вообще не понял. Зачем столько форков?
 
     @Test   (expected=RuntimeException.class)
     void fork2() {

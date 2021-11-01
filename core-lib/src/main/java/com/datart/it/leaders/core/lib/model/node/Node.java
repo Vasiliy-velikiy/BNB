@@ -3,6 +3,8 @@ package com.datart.it.leaders.core.lib.model.node;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
 
 public class  Node{
 
@@ -10,6 +12,31 @@ public class  Node{
     private LinkedList<Integer>linkedListList;
     private int indicatorOne;
     private int indicatorTwo;
+// Конструкторы пишут вначале, чтобы не бегать по коду и не искать как сделать объект
+
+    public Node(){
+    }
+
+    //Какой смысл в ветке с одним элементом ?
+    public Node(int i){
+        this.indicatorOne=0;
+        this.indicatorTwo=1;
+        this.permutation=i;
+        String s= String.valueOf(i);
+        linkedListList=new LinkedList<Integer>();
+
+        for (int j = 0; j <s.length() ; j++) {
+            linkedListList.add(Integer.parseInt(String.valueOf(s.charAt(j))));
+        }
+    }
+
+    //конструктор копирования
+    public Node(Node srcNode){
+        this.indicatorOne=srcNode.indicatorOne;
+        this.indicatorTwo=srcNode.indicatorTwo;
+        this.permutation=srcNode.permutation;
+        this.linkedListList.addAll(srcNode.linkedListList);
+    }
 
 
     public int incrementIndicatorOne(int one){
@@ -46,8 +73,8 @@ public class  Node{
         this.permutation = permutation;
     }
 
-    public void setLinkedListList(LinkedList<Integer> linkedListList) {
-        this.linkedListList = linkedListList;
+    public void setLinkedListList(List<Integer> linkedListList) {
+        this.linkedListList.addAll(linkedListList);
     }
 
     public void setIndicatorOne(int indicatorOne) {
@@ -58,28 +85,7 @@ public class  Node{
         this.indicatorTwo = indicatorTwo;
     }
 
-    public Node(int i){
-       this.indicatorOne=0;
-       this.indicatorTwo=1;
-       this.permutation=i;
-       String s= String.valueOf(i);
-       linkedListList=new LinkedList<Integer>();
-
-       for (int j = 0; j <s.length() ; j++) {
-           linkedListList.add(Integer.parseInt(String.valueOf(s.charAt(j))));
-       }
-  }
-
-   //конструктор копирования
-    public Node(Node srcNode){
-        this.indicatorOne=srcNode.indicatorOne;
-        this.indicatorTwo=srcNode.indicatorTwo;
-        this.permutation=srcNode.permutation;
-        this.linkedListList=srcNode.linkedListList;
-    }
-
-
-
+    //??? не понял. Это класс ноды. зачем тебе параметр еще одна нода?
     public Node fork(Node node){
 
         Node newNode=new Node(node);
@@ -101,4 +107,20 @@ public class  Node{
 
         return newNode;
     }
+
+    //Вот все что нужно было сделать.
+    public Node fork(){
+        indicatorTwo++;
+        if ((indicatorOne>=linkedListList.size())||(indicatorTwo>=linkedListList.size())){
+            return null;
+        }
+        Node newNode=new Node(this);
+        List newList = newNode.getLinkedListList();
+        Object forkElement = newList.remove(indicatorTwo);
+        newList.add(indicatorOne+1,forkElement);
+        newNode.setIndicatorOne(indicatorOne+1);
+        newNode.setIndicatorTwo(indicatorOne+2);
+        return newNode;
+    }
+
 }
