@@ -3,7 +3,8 @@ package com.datart.it.leaders.core.lib.model.node;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 import org.junit.rules.ExpectedException;
 import org.mockito.internal.matchers.Null;
 
@@ -12,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 
 class NodeTest {
 
@@ -25,8 +26,7 @@ class NodeTest {
 
         LinkedList expected=newNode1.getLinkedListList();
         System.out.println(expected.toString());
-
-        assertEquals(expected,actual);
+        Assert.assertEquals(expected,actual);
     }
     @Rule
 
