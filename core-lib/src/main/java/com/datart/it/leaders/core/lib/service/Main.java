@@ -8,7 +8,7 @@ import java.math.BigInteger;
 
 public class Main {
     public static void main(String[] args) {
-        int metrica = 0;
+        int minT = 0;
         Work work1 = new Work(1, 14);
         Work work2 = new Work(2, 5);
         Work work3 = new Work(3, 7);
@@ -36,7 +36,6 @@ public class Main {
         partType4.workflow.add(work3);
         partType4.workflow.add(work1);
 
-
         Part part1 = new Part(1, partType1);
         Part part2 = new Part(2, partType1);
         Part part3 = new Part(3, partType2);
@@ -44,7 +43,6 @@ public class Main {
         Part part5 = new Part(5, partType4);
         Part part6 = new Part(6, partType2);
         Part part7 = new Part(7, partType3);
-
 
         ArrayList<Part> arrayList1 = new ArrayList();
         arrayList1.add(part1);
@@ -72,9 +70,6 @@ public class Main {
         int count3 = arrayList3.size() * work3.getTime();
         System.out.println(count3);
 
-
-
-
         if (work1.getTime() < work2.getTime() && work1.getTime() < work3.getTime()) {
             arrayList1.clear();
         } else if (work2.getTime() < work1.getTime() && work2.getTime() < work3.getTime()) {
@@ -83,38 +78,47 @@ public class Main {
             arrayList3.clear();
         }
         if (count1 < count2 && count1 < count3) {
-            metrica = count1;
+            minT = count1;
         } else if (count2 < count1 && count2 < count3) {
-            metrica = count2;
+            minT = count2;
         } else if (count3 < count1 && count3 < count2) {
-            metrica = count3;
+            minT = count3;
         }
 
-        int t0 = metrica;
-        int t1 = partType1.workflow.get(0).getTime() + partType1.workflow.get(1).getTime();
+        int t0 = minT;
+        int notReadyDetails;
+
+
+        System.out.println(minT);
+
+        TransportLine transportLine = new TransportLine(1);
+        transportLine.tsLine = new ArrayList<>();
+        transportLine.tsLine.add(part4);
+        transportLine.tsLine.add(part5);
+        transportLine.tsLine.add(part7);
+
+        if (work1.getTime()<t0){
+            arrayList1.clear();
+            System.out.println("Line ready");
+        } else notReadyDetails = work1.getLine() - t0;
+            System.out.println("Details not ready");
+
+
+
+        // if pa
+
+        /*int t1 = partType1.workflow.get(0).getTime() + partType1.workflow.get(1).getTime();
         int t2 = partType2.workflow.get(0).getTime();
         int t3 = partType3.workflow.get(0).getTime() + partType3.workflow.get(1).getTime();
-
-
-
         System.out.println(t1);
         System.out.println(t2);
         System.out.println(t3);
-
-        TransportLine transportLine = new TransportLine(1);
-        //transportLine.tsLine = new ArrayList<>();
-        //transportLine.tsLine.add(part1);
-
-        /*arrayList1.remove(part4);
-        arrayList2.remove(part4);
-        arrayList2.remove(part5);
-        arrayList2.remove(part7);
          */
 
 
-
-
-
+        //TransportLine transportLine = new TransportLine(1);
+        //transportLine.tsLine = new ArrayList<>();
+        //transportLine.tsLine.add(part1);
 
         /*ArrayList res_parts = new ArrayList();
         res_parts.add(arrayList1);
