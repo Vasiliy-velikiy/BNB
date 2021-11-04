@@ -70,25 +70,6 @@ public class Main {
         int count3 = arrayList3.size() * work3.getTime();
         System.out.println(count3);
 
-        if (work1.getTime() < work2.getTime() && work1.getTime() < work3.getTime()) {
-            arrayList1.clear();
-        } else if (work2.getTime() < work1.getTime() && work2.getTime() < work3.getTime()) {
-            arrayList2.clear();
-        } else if (work3.getTime() < work1.getTime() && work3.getTime() < work2.getTime()) {
-            arrayList3.clear();
-        }
-        if (count1 < count2 && count1 < count3) {
-            minT = count1;
-        } else if (count2 < count1 && count2 < count3) {
-            minT = count2;
-        } else if (count3 < count1 && count3 < count2) {
-            minT = count3;
-        }
-
-        int t0 = minT;
-        int notReadyDetails;
-
-
         System.out.println(minT);
 
         TransportLine transportLine = new TransportLine(1);
@@ -96,13 +77,6 @@ public class Main {
         transportLine.tsLine.add(part4);
         transportLine.tsLine.add(part5);
         transportLine.tsLine.add(part7);
-
-        if (work1.getTime()<t0){
-            arrayList1.clear();
-            System.out.println("Line ready");
-        } else notReadyDetails = work1.getLine() - t0;
-            System.out.println("Details not ready");
-
 
 
         // if pa
