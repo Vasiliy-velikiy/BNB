@@ -8,5 +8,8 @@ public class Plant {
     getLowMetric()
      */
 
+    AssemblingLine line1 = new AssemblingLine(1);
+    TransportLine tsLine = new TransportLine(1);
+
 
 }

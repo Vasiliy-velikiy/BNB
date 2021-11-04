@@ -14,13 +14,14 @@ public class TransportLine {
         tsLine.add(/*Parts*/);
     }
 
-    public void transport(){
-
-        if(/*Part.partType = asmLine.workflow && Part.Time > workflow */){
-            /*asmLine.add(Part)*/
-        } else if (/*Part.partType = asmLine.workflow && Part.Time < workflow*/){
-            /*Delete part*/
+   /* public void transport(){
+        if(Part.partType = asmLine.workflow && Part.Time > workflow ){
+            asmLine.add(Part)
+        } else if (Part.partType = asmLine.workflow && Part.Time < workflow){
+            Delete part
         }
-
     }
+
+    */
+
 }
