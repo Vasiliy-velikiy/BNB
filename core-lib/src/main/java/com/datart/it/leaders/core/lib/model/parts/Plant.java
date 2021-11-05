@@ -11,7 +11,7 @@ public class Plant {
      */
 
     List<AssemblingLine> lines;
-    TransportLine transport;
+    TransportLine transportLine = new TransportLine(1);
 
     void Plant(int LinesCount){
 
