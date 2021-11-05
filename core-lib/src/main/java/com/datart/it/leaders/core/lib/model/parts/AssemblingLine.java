@@ -3,11 +3,14 @@ package com.datart.it.leaders.core.lib.model.parts;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.datart.it.leaders.core.lib.model.parts.Part.currentWorkflow;
+
 public class AssemblingLine {
 
     int id;
     int workTime;
     public ArrayList<Part> asmLine;
+    int T; // минимальное время работы линии
 
     public AssemblingLine(int id) {
         this.id = id;
@@ -15,7 +18,7 @@ public class AssemblingLine {
 
     void addPart(Part part){
         asmLine.add(part);
-        workTime += part.currentWorkflow.get(0).getTime();
+        workTime += currentWorkflow.get(0).getTime();
     }
 
     void addParts(List<Part>parts){
@@ -26,8 +29,16 @@ public class AssemblingLine {
         int t = 0;
 
         do {
-            asmLine.get(1);
-
-        }
+            if(asmLine.contains(id)) {
+                asmLine.get(id);
+                t = t + asmLine.get(0).currentWorkflow.get(0).getTime();
+                time = t;
+            }
+            if (t <= T){
+                t = currentWorkflow.get(0).getTime();
+                T -= t;
+            }
+        } while (t<= T);
+        return asmLine;
     }
 }

@@ -6,7 +6,7 @@ import java.util.List;
 public class Part{  //конкретная деталь которая запускаеися на конвеер прямо сейчас
     private int id; //индентификатор детали
     private PartType type; //тип детали
-    public List<Work> currentWorkflow;
+    public static List<Work> currentWorkflow;
 
     public Part(int id, PartType type){
         this.id=id;
