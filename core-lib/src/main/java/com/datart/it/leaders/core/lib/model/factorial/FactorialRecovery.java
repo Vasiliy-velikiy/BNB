@@ -1,52 +1,47 @@
 package com.datart.it.leaders.core.lib.model.factorial;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class FactorialRecovery {
     final ArrayList<Integer> firstRearrangment;
 
+    /**
+     * Инициализация конструктора, ArrayList<Integer>, в котором находятся элементы начальной перестановки
+     * @param firstRearrangment
+     */
     public FactorialRecovery (ArrayList<Integer> firstRearrangment) {
         this.firstRearrangment = firstRearrangment;
     }
 
+    /**
+     * Метод принимает, объект FactorialNumber, в котором находится индекс в факториальной системе счисления.
+     * tempRsl - времменый массив, в который мы расставляем элементы в нужном порядке из firstRearrangment.
+     * ArrayList<Integer> position - массив в котором хранятся индексы, для расстановки элементов в результирующий массив
+     * int counter - счетчик для заполнения индексов в position.
+     * int counterOfFRNumberOut - счетчик для числе элементов из firstRearrangment
+     * while - цикл для расстонвки индексов в position от чисел firstRearrangment.size() - 1 до 0.
+     * for - цикл в котором мы поочередно берем индекс из FactorialNumber, удаляем ячейку под этим индексом из
+     * positionControl, получая нужный индекс для заполнения в результирующий массив tempRsl.
+     * последнее удаление из массива tempRsl, являеется последним элементом перестановки.
+     * @param factorialNumber
+     * @return ArrayList<Integer> rsl
+     */
     public ArrayList<Integer> recoveryByFactorialNumber (FactorialNumber factorialNumber) {
-        ArrayList<Integer> rslRecovery = new ArrayList<>();// результирующий массив,в нем елементы в нужном порядке на выходе
-        ArrayList<Integer> positionControl = new ArrayList<>();//массив с индексами елементов которые мы ищем
-        int counter = firstRearrangment.size() - 1;//счетчик елементов,для добавления в обратном порядке в positionControl
-        int counterOfFRNumberOut = 0;//счетчик елементов,массива начальной перестановки
-        while (counter != -1) {// в цикле добавляю индексы от размера массива начальной перестановки - 1 до 0
+        Integer[] tempRsl = new Integer[firstRearrangment.size()];
+        LinkedList<Integer> positionControl = new LinkedList<>();
+        int counter = firstRearrangment.size() - 1;
+        int counterOfFRNumberOut = 0;
+        while (counter != -1) {
             positionControl.add(counter);
             counter--;
         }
-        for (Integer i : factorialNumber.inNumber) {// берем значения из factorialNumber
-            int index = i;// получаем первый индекс для удаления из positionControl
-           rslRecovery.add(positionControl.remove(index), firstRearrangment.get(counterOfFRNumberOut++));
-           // добавляю в результирующий массив, удаляя индекс из positionControl, получаю нужный индекс для добавления
-            // в результирующий массив,добавляя елементы из начальной перестановки по порядку
+        for (Integer i : factorialNumber.inNumber) {
+            int index = i;
+            tempRsl[positionControl.remove(index)] = firstRearrangment.get(counterOfFRNumberOut++);
         }
-        rslRecovery.add(positionControl.get(0), firstRearrangment.get(firstRearrangment.size() - 1));//добавление последнего ел.
-     return rslRecovery;
-    }
-
-    public static void main(String[] args) {
-        ArrayList<Integer> in = new ArrayList<>();
-        in.add(1);
-        in.add(2);
-        in.add(3);
-        in.add(4);
-        in.add(5);
-        FactorialRecovery fc = new FactorialRecovery(in);
-        LinkedList<Integer> list = new LinkedList<>();
-        list.add(4);
-        list.add(0);
-        list.add(2);
-        list.add(0);
-        FactorialNumber fn = new FactorialNumber(list);
-        ArrayList<Integer> out = fc.recoveryByFactorialNumber(fn);
-        for (Integer i : out) {
-            System.out.println(i);
-        }
-
+        tempRsl[positionControl.get(0)] = firstRearrangment.get(firstRearrangment.size() - 1);
+        return new ArrayList<>(Arrays.asList(tempRsl));
     }
 }
