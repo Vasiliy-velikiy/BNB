@@ -34,9 +34,10 @@ public class AssemblingLine {
             if(t <= time) {
                 time -= currentWorkflow.get(i).getTime();
                 t = currentWorkflow.get(i).getTime();
-            } else break;
+                return i;
+            }
         }
-        return asmLine;
+
     }
 
 }
