@@ -3,8 +3,6 @@ package com.datart.it.leaders.core.lib.model.parts;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.datart.it.leaders.core.lib.model.parts.Part.currentWorkflow;
-
 public class AssemblingLine {
 
     int id;
@@ -17,27 +15,28 @@ public class AssemblingLine {
 
     void addPart(Part part){
         asmLine.add(part);
-        workTime += currentWorkflow.get(0).getTime();
+        workTime += part.currentWorkflow.get(0).getTime();
     }
 
-    void addParts(List<Part>parts){
+    void addParts(List<Part> parts){ asmLine.addAll(parts); }
 
-        asmLine.add((Part) parts);
-    }
-
-    List<Part> Process(int time){
+    List<Part> Process(int time) {
         int t = 0;
-        for (int i = 0; i < asmLine.size(); i++) {
-            asmLine.get(i);
-            t = t + currentWorkflow.get(i).getTime();
-
-            if(t <= time) {
-                time -= currentWorkflow.get(i).getTime();
-                t = currentWorkflow.get(i).getTime();
-                return i;
+        int i = 0;
+        List<Part> finishedParts = null;
+        while (t <= time) {
+            Part curPart = asmLine.get(i);
+            t += curPart.currentWorkflow.get(0).getTime();
+            if (t > time) {
+                curPart.currentWorkflow.get(0).setTime(t - time);
+                finishedParts.add(curPart);
+                break;
             }
+            curPart.currentWorkflow.get(0).setTime(t);
+            finishedParts.add(curPart);
+            i++;
         }
-
+        return finishedParts;
     }
 
 }

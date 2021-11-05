@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static com.datart.it.leaders.core.lib.model.parts.Part.currentWorkflow;
-
 
 public class TransportLine {
     private int line; //линия

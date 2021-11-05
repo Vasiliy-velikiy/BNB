@@ -17,4 +17,8 @@ public class Work {
         this.line=line;
         this.time=time;
     }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
 }

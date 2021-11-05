@@ -19,11 +19,11 @@ public class Plant {
     }
 
     long highMetric(){
-
+        return 0;
     }
 
     long lowMetric(){
-
+        return 0;
     }
 
     void Transport(){
