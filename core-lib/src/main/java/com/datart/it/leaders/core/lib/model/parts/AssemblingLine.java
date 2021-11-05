@@ -5,11 +5,11 @@ import java.util.List;
 
 public class AssemblingLine {
 
-    int id;
+    Work id;
     int workTime;
     public ArrayList<Part> asmLine;
 
-    public AssemblingLine(int id) {
+    public AssemblingLine(Work id) {
         this.id = id;
     }
 

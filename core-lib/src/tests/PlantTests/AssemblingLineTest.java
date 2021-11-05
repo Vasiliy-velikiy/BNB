@@ -33,7 +33,7 @@ public class AssemblingLineTest {
         pt3.workflow.add(work3);
         pt3.workflow.add(work1);
 
-        AssemblingLine as1 = new AssemblingLine(1);
+        AssemblingLine as1 = new AssemblingLine(work1);
 
     }
 }
