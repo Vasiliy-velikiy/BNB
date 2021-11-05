@@ -13,10 +13,4 @@ public class AssemblingLine {
         this.id = id;
     }
 
-    public void putOnLine(/*Parts*/){
-        asmLine.add();
-        System.out.println("Details on work line");
-
-        /* workTime = Parts.Time*/
-    }
 }
