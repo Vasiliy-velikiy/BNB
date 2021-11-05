@@ -1,5 +1,7 @@
 package com.datart.it.leaders.core.lib.model.parts;
 
+import java.util.List;
+
 public class Plant {
     /*
     Список линий производств
@@ -8,8 +10,7 @@ public class Plant {
     getLowMetric()
      */
 
-    AssemblingLine line1 = new AssemblingLine(1);
-    TransportLine tsLine = new TransportLine(1);
-
+    List<AssemblingLine> lines;
+    TransportLine transport;
 
 }

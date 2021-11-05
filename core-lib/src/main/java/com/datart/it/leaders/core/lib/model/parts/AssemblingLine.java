@@ -13,4 +13,15 @@ public class AssemblingLine {
         this.id = id;
     }
 
+    void addPart(Part part){
+
+    }
+
+    void addParts(List<Part>parts){
+
+    }
+
+    List<Part> Procces(int time){
+
+    }
 }
