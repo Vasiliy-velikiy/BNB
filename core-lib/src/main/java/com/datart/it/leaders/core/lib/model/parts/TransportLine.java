@@ -25,9 +25,6 @@ public class TransportLine {
     }
 
     void Prepare(){
-        if (tsLine.contains(currentWorkflow.size()==1)){
-            tsLine.remove(currentWorkflow.size()==1);
-        }
 
     }
 

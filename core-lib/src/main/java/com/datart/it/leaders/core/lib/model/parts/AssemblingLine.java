@@ -10,7 +10,6 @@ public class AssemblingLine {
     int id;
     int workTime;
     public ArrayList<Part> asmLine;
-    int T; // минимальное время работы линии
 
     public AssemblingLine(int id) {
         this.id = id;
@@ -22,23 +21,21 @@ public class AssemblingLine {
     }
 
     void addParts(List<Part>parts){
+
         asmLine.add((Part) parts);
     }
 
     List<Part> Process(int time){
         int t = 0;
+        for (int i = 0; i < asmLine.size(); i++) {
+            asmLine.get(i);
+            t = t + currentWorkflow.get(i).getTime();
 
-        do {
-            if(asmLine.contains(id)) {
-                asmLine.get(id);
-                t = t + asmLine.get(0).currentWorkflow.get(0).getTime();
-                time = t;
-            }
-            if (t <= T){
-                t = currentWorkflow.get(0).getTime();
-                T -= t;
-            }
-        } while (t<= T);
+            if(t <= time) {
+                time -= currentWorkflow.get(i).getTime();
+                t = currentWorkflow.get(i).getTime();
+            } else break;
+        }
         return asmLine;
     }
 
