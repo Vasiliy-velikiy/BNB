@@ -14,14 +14,20 @@ public class AssemblingLine {
     }
 
     void addPart(Part part){
-
+        asmLine.add(part);
+        workTime += part.currentWorkflow.get(0).getTime();
     }
 
     void addParts(List<Part>parts){
-
+        asmLine.add((Part) parts);
     }
 
-    List<Part> Procces(int time){
+    List<Part> Process(int time){
+        int t = 0;
 
+        do {
+            asmLine.get(1);
+
+        }
     }
 }

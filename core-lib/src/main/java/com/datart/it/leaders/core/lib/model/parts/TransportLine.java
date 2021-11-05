@@ -5,18 +5,18 @@ import java.util.List;
 
 public class TransportLine {
     private int line; //линия
-    public ArrayList<Part> tsLine;
+    public List<Part> tsLine;
 
     public TransportLine(int line) {
         this.line = line;
     }
 
     void addPart(Part part){
-
+        tsLine.add(part);
     }
 
     void AddParts(List<Part> parts){
-
+        tsLine.add((Part) parts);
     }
 
     void Prepare(){

@@ -13,4 +13,19 @@ public class Plant {
     List<AssemblingLine> lines;
     TransportLine transport;
 
+    void Plant(int LinesCount){
+
+    }
+
+    long highMetric(){
+
+    }
+
+    long lowMetric(){
+
+    }
+
+    void Transport(){
+
+    }
 }
