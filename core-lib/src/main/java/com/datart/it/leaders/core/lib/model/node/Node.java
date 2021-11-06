@@ -15,7 +15,7 @@ public class  Node{
        this.indicatorTwo=1;
        this.perestanivka=i;
        String s= String.valueOf(i);
-       arrayList=new ArrayList<>();
+       arrayList=new ArrayList<Integer>();
 
        for (int j = 0; j <s.length() ; j++) {
            arrayList.add(Integer.parseInt(String.valueOf(s.charAt(j))));
