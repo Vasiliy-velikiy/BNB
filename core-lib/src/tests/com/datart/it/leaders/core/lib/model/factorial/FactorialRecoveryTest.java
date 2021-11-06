@@ -15,11 +15,11 @@ public class FactorialRecoveryTest {
         List<Integer> arrayListInit = List.of(1, 2, 3, 4, 5);
         List<Integer> rslarrayListInit = List.of(1, 3, 5, 4, 2);
         LinkedList<Integer> factorialNumber = new LinkedList<>(linkedListInit);
-        ArrayList<Integer> firstRearengment = new ArrayList<>(arrayListInit);
-        ArrayList<Integer> rslRearengment = new ArrayList<>(rslarrayListInit);
+        LinkedList<Integer> firstRearengment = new LinkedList<>(arrayListInit);
+        LinkedList<Integer> rslRearengment = new LinkedList<>(rslarrayListInit);
         FactorialNumber fN = new FactorialNumber(factorialNumber);
         FactorialRecovery factorialRecovery = new FactorialRecovery(firstRearengment);
-        ArrayList<Integer> rslOfFR = factorialRecovery.recoveryByFactorialNumber(fN);
+        LinkedList<Integer> rslOfFR = factorialRecovery.recoveryByFactorialNumber(fN);
         Assert.assertEquals(rslRearengment, rslOfFR);
     }
 

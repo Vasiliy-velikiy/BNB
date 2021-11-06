@@ -5,20 +5,20 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 public class FactorialRecovery {
-    final ArrayList<Integer> firstRearrangment;
+    final LinkedList<Integer> firstRearrangment;
 
     /**
      * Инициализация конструктора, ArrayList<Integer>, в котором находятся элементы начальной перестановки
      * @param firstRearrangment
      */
-    public FactorialRecovery (ArrayList<Integer> firstRearrangment) {
+    public FactorialRecovery (LinkedList<Integer> firstRearrangment) {
         this.firstRearrangment = firstRearrangment;
     }
 
     /**
      * Метод принимает, объект FactorialNumber, в котором находится индекс в факториальной системе счисления.
      * tempRsl - времменый массив, в который мы расставляем элементы в нужном порядке из firstRearrangment.
-     * ArrayList<Integer> position - массив в котором хранятся индексы, для расстановки элементов в результирующий массив
+     * LinkedList<Integer> position - массив в котором хранятся индексы, для расстановки элементов в результирующий массив
      * int counter - счетчик для заполнения индексов в position.
      * int counterOfFRNumberOut - счетчик для числе элементов из firstRearrangment
      * while - цикл для расстонвки индексов в position от чисел firstRearrangment.size() - 1 до 0.
@@ -28,7 +28,7 @@ public class FactorialRecovery {
      * @param factorialNumber
      * @return ArrayList<Integer> rsl
      */
-    public ArrayList<Integer> recoveryByFactorialNumber (FactorialNumber factorialNumber) {
+    public LinkedList<Integer> recoveryByFactorialNumber (FactorialNumber factorialNumber) {
         Integer[] tempRsl = new Integer[firstRearrangment.size()];
         LinkedList<Integer> positionControl = new LinkedList<>();
         int counter = firstRearrangment.size() - 1;
@@ -42,6 +42,6 @@ public class FactorialRecovery {
             tempRsl[positionControl.remove(index)] = firstRearrangment.get(counterOfFRNumberOut++);
         }
         tempRsl[positionControl.get(0)] = firstRearrangment.get(firstRearrangment.size() - 1);
-        return new ArrayList<>(Arrays.asList(tempRsl));
+        return new LinkedList<>(Arrays.asList(tempRsl));
     }
 }

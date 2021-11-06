@@ -1,78 +1,95 @@
 package com.datart.it.leaders.core.lib.model.factorial;
 
 import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
 
 public class FactorialNumber {
     /**
      * факториальное число,хранится в структуре данных LinkedList
      */
-    final LinkedList<Integer> inNumber;
+    LinkedList<Integer> inNumber;
 
     /**
      * факториальное число, инициализируется в кострукторе,в нем так же находится проверка ,что число в фк системе счисления
-     * int rankFactorial - инициализируется размером inNumber. используется для сравнения разрядности числа с элементом массива
-     * int rslCouner - счетчик,для проверки, что все числа являются факториальными
-     * в цикле сравниваем,что значение элемента не выходит за разрядность его числа,прибавляем 1,если условие верно
-     * и сравниваем результат, еслы на ввыходе rslCounter равен size,все елементы соответствуют.
+     * int rankFactorial - инициализируется 1, разряд последнего елемента в списке.
+     * в цикле сравниваем,что значение элемента не выходит за разрядность его числа,если выходит число не факториальное
+     *
      * @param inNumber
      */
-    public FactorialNumber (LinkedList<Integer> inNumber) {
-        int rankFactorial = inNumber.size();
-        int rslCounter = 0;
-        for (Integer integer : inNumber) {
-            if (integer <= rankFactorial--) {
-                rslCounter = rslCounter + 1;
-            }
-        }
-        if (rslCounter != inNumber.size()) {
-            this.inNumber = null;
-        } else {
-            this.inNumber = inNumber;
-        }
-    }
-
-    /**
-     * сравниваем в цикле числа входящего числа с изначальным
-     * @param factorialNumber
-     * @return false если числа не соответствуют
-     */
-    public boolean equals(FactorialNumber factorialNumber) {
-        boolean rsl = true;
-        for (int i = 0; i < inNumber.size(); i++) {
-            if (!factorialNumber.inNumber.get(i).equals(inNumber.get(i))) {
-                rsl = false;
-                break;
-            }
-        }
-        return rsl;
-    }
-
-    public LinkedList<Integer> addToFactorialNumber1 () {
-        LinkedList<Integer> tempResult = new LinkedList<>(inNumber);
+    public FactorialNumber(LinkedList<Integer> inNumber) {
         int rankFactorial = 1;
-        ListIterator<Integer> element = tempResult.listIterator(tempResult.size());
-        int descendingNumberInList = element.previous();
-        int indexOfDescendingNumber = inNumber.indexOf(descendingNumberInList);
-        while (element.hasPrevious()) {
-            if (descendingNumberInList + 1 <= rankFactorial) {
-                tempResult.add(indexOfDescendingNumber, tempResult.remove(indexOfDescendingNumber) + 1);
-                break;
-            } else {
-                int currentNumber = tempResult.remove(indexOfDescendingNumber);
-                tempResult.add(indexOfDescendingNumber, (rankFactorial + 1) - (currentNumber + 1));
-                rankFactorial++;
+        int indexOfElemenet = inNumber.size() - 1;
+        while (rankFactorial <= inNumber.size()) {
+            if (inNumber.get(indexOfElemenet--) > rankFactorial++) {
+                throw new IllegalArgumentException("Number isn't FactorialNumber");
             }
         }
-        return tempResult;
+        this.inNumber = inNumber;
     }
 
-    public static void main(String[] args) {
-        List<Integer> list = List.of(4, 0, 2, 1);
-        LinkedList<Integer> linkedList = new LinkedList<>(list);
-        FactorialNumber fc = new FactorialNumber(linkedList);
-        LinkedList<Integer> rs = fc.addToFactorialNumber1();
-        System.out.println(rs);
+        /**
+         * сравниваем списки на идентичность
+         * @param factorialNumber
+         * @return false если числа не соответствуют
+         */
+        public boolean equals (FactorialNumber factorialNumber){
+            return inNumber.equals(factorialNumber.inNumber);
+        }
+
+    public FactorialNumber addToFactorialNumberAnotherNumber (FactorialNumber factorialNumber) {
+            LinkedList<Integer> result = new LinkedList<>();
+            Integer carry = 0;
+            Integer i = 1;
+            while ((inNumber.size() > 0) || (factorialNumber.inNumber.size() > 0) || (carry != 0)) {
+                Integer first = (inNumber.size() > 0) ? inNumber.remove(inNumber.size() - 1) : 0;
+                Integer second = (factorialNumber.inNumber.size() > 0) ?
+                        factorialNumber.inNumber.remove(factorialNumber.inNumber.size() - 1) : 0;
+                Integer sum = first + second + carry;
+                carry = sum > i ? 1 : 0;
+                result.addFirst(sum > i ? sum - (i + 1) : sum);
+                i++;
+            }
+            this.inNumber = result;
+            return this;
+        }
+
+    public FactorialNumber removeFromFactorialNumberAnotherNumber (FactorialNumber factorialNumber) {
+        LinkedList<Integer> result = new LinkedList<>();
+        Integer carry = 0;
+        Integer i = 1;
+        while ((inNumber.size() > 0) || (factorialNumber.inNumber.size() > 0) || (carry != 0)) {
+            Integer first = (inNumber.size() > 0) ? inNumber.remove(inNumber.size() - 1) : 0;
+            Integer second = (factorialNumber.inNumber.size() > 0) ?
+                    factorialNumber.inNumber.remove(factorialNumber.inNumber.size() - 1) : 0;
+            Integer subtraction = first - second - carry;
+            carry = subtraction < i && subtraction != 0 ? 1 : 0;
+            result.addFirst(subtraction < i & subtraction != 0 ? subtraction + (i + 1) : subtraction);
+            i++;
+        }
+        this.inNumber = result;
+        return this;
     }
+
+    public FactorialNumber increase() {
+            LinkedList<Integer> result = new LinkedList<>(this.inNumber);
+            result.addLast(1);
+        return new FactorialNumber(result);
+    }
+
+
+
+        public static void main (String[]args){
+            LinkedList<Integer> linkedList = new LinkedList<>();
+            linkedList.add(4);
+            linkedList.add(3);
+            linkedList.add(2);
+            linkedList.add(1);
+            LinkedList<Integer> linkedList1 = new LinkedList<>();
+            linkedList1.add(3);
+            linkedList1.add(2);
+            linkedList1.add(1);
+            FactorialNumber fc = new FactorialNumber(linkedList);
+            FactorialNumber fc1 = new FactorialNumber(linkedList1);
+        FactorialNumber fc2 = fc.addToFactorialNumberAnotherNumber(fc1);
+            System.out.println(fc2.inNumber);
+        }
 }
