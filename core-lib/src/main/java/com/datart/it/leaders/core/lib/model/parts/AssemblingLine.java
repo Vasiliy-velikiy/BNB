@@ -5,22 +5,25 @@ import java.util.List;
 
 public class AssemblingLine {
 
-    Work id;
-    int workTime;
-    public ArrayList<Part> asmLine;
+    int id;
+    int workTime = 0;
+    public List<Part> asmLine = new ArrayList<>();
 
-    public AssemblingLine(Work id) {
+
+    public AssemblingLine(int id) {
         this.id = id;
     }
 
-    void addPart(Part part){
+    public void addPart(Part part){
         asmLine.add(part);
         workTime += part.currentWorkflow.get(0).getTime();
     }
 
-    void addParts(List<Part> parts){ asmLine.addAll(parts); }
+    public void addParts(List<Part> parts){
+        asmLine.addAll(parts);
+    }
 
-    List<Part> Process(int time) {
+    public List<Part> Process(int time) {
         int t = 0;
         int i = 0;
         List<Part> finishedParts = null;
