@@ -6,24 +6,27 @@ import java.util.List;
 
 public class  Node{
 
-    // Конструкторы пишут вначале, чтобы не бегать по коду и не искать как сделать объект
-    public Node(){
-    }
-
-    private LinkedList<Integer> linkedList;
+    private List<Integer> linkedList;
     private Integer indicatorOne;
     private Integer indicatorTwo;
 
+
+
+    // Конструкторы пишут вначале, чтобы не бегать по коду и не искать как сделать объект
+    public Node(){
+       this.linkedList=new LinkedList<>();
+    }
 
     //конструктор копирования
     public Node(Node srcNode){
         this.indicatorOne=srcNode.indicatorOne;
         this.indicatorTwo=srcNode.indicatorTwo;
+        this.linkedList=new LinkedList<>();
         this.linkedList.addAll(srcNode.linkedList);
     }
 
 
-    public LinkedList<Integer> getLinkedList() {
+    public List<Integer> getLinkedList() {
         return linkedList;
     }
 
@@ -37,6 +40,7 @@ public class  Node{
 
     public void setLinkedList(List<Integer> linkedList) {
         this.linkedList.addAll(linkedList);
+
     }
 
     public void setIndicatorOne(int indicatorOne) {

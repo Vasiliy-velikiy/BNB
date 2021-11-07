@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 import static org.junit.Assert.*;
 
 public class NodeTest {
+
+
 @Test
    public void forkOK() {
         Node node=new Node();
