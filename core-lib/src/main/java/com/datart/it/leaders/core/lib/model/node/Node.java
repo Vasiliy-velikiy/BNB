@@ -59,8 +59,8 @@ public class  Node{
         }
         indicatorTwo++;
         Node newNode=new Node(this);
-        List newList = newNode.getLinkedList();
-        Object forkElement = newList.remove(indicatorTwo);
+        List<Integer> newList = newNode.getLinkedList();
+        Integer forkElement = newList.remove((int)indicatorTwo);    //remove(indicatorTwo);
         newList.add(indicatorOne+1,forkElement);
         newNode.setIndicatorOne(indicatorOne+1);
         newNode.setIndicatorTwo(indicatorOne+2);

@@ -19,7 +19,7 @@ public class NodeTest {
                 .collect(Collectors.toList());
         node.setLinkedList(arr);
         node.setIndicatorOne(0);
-        node.setIndicatorTwo(2);
+        node.setIndicatorTwo(1);
         Node newNode=node.fork();
         assertEquals(newNode.getIndicatorOne(),1);
         assertEquals(newNode.getIndicatorTwo(),2);
