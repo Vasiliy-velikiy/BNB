@@ -26,6 +26,13 @@ public class FactorialNumberTest {
     }
 
     @Test
+    public void whenIncreaseByOne() {
+        FactorialNumber fN1 = new FactorialNumber(new LinkedList<>(Arrays.asList(4, 0, 2, 1)));
+        FactorialNumber fNRsl = new FactorialNumber(new LinkedList<>(Arrays.asList(4, 1, 0, 0)));
+        Assert.assertEquals( fN1.increaseByOne().inNumber , fNRsl.inNumber);
+    }
+
+    @Test
     public void whenRemove1001to0110() {
         FactorialNumber fN1 = new FactorialNumber(new LinkedList<>(Arrays.asList(1, 0, 0, 1)));
         FactorialNumber fNR2 = new FactorialNumber(new LinkedList<>(Arrays.asList(0, 1, 1, 0)));

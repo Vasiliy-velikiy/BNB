@@ -1,6 +1,11 @@
 package com.datart.it.leaders.core.lib.model.factorial;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class FactorialNumber {
     /**
@@ -16,14 +21,23 @@ public class FactorialNumber {
      * @param inNumber
      */
     public FactorialNumber(LinkedList<Integer> inNumber) {
-        int rankFactorial = 1;
-        int indexOfElemenet = inNumber.size() - 1;
-        while (rankFactorial <= inNumber.size()) {
-            if (inNumber.get(indexOfElemenet--) > rankFactorial++) {
-                throw new IllegalArgumentException("Number isn't FactorialNumber");
-            }
+        //переворачиваем массив
+        boolean isBadFactor = IntStream.rangeClosed(1, inNumber.size())
+                .anyMatch(i -> {
+                    return inNumber.get(inNumber.size() - i) >= i+1;
+                });
+        if (isBadFactor) {
+            throw new IllegalArgumentException("Wrong factor array");
         }
         this.inNumber = inNumber;
+        Collections.reverse(this.inNumber);
+    }
+
+    public List<Integer> getInNumber() {
+        List<Integer> retval = inNumber.stream()
+                .collect(Collectors.toList());
+        Collections.reverse(retval);
+        return retval;
     }
 
         /**
@@ -40,12 +54,11 @@ public class FactorialNumber {
             Integer carry = 0;
             Integer i = 1;
             while ((inNumber.size() > 0) || (factorialNumber.inNumber.size() > 0) || (carry != 0)) {
-                Integer first = (inNumber.size() > 0) ? inNumber.remove(inNumber.size() - 1) : 0;
-                Integer second = (factorialNumber.inNumber.size() > 0) ?
-                        factorialNumber.inNumber.remove(factorialNumber.inNumber.size() - 1) : 0;
+                Integer first = (inNumber.size() > 0) ? inNumber.remove(0) : 0;
+                Integer second = (factorialNumber.inNumber.size() > 0) ? factorialNumber.inNumber.remove(0) : 0;
                 Integer sum = first + second + carry;
                 carry = sum > i ? 1 : 0;
-                result.addFirst(sum > i ? sum - (i + 1) : sum);
+                result.add(sum > i ? sum - (i + 1) : sum);
                 i++;
             }
             this.inNumber = result;
@@ -57,39 +70,23 @@ public class FactorialNumber {
         Integer carry = 0;
         Integer i = 1;
         while ((inNumber.size() > 0) || (factorialNumber.inNumber.size() > 0) || (carry != 0)) {
-            Integer first = (inNumber.size() > 0) ? inNumber.remove(inNumber.size() - 1) : 0;
+            Integer first = (inNumber.size() > 0) ? inNumber.remove(0) : 0;
             Integer second = (factorialNumber.inNumber.size() > 0) ?
-                    factorialNumber.inNumber.remove(factorialNumber.inNumber.size() - 1) : 0;
-            Integer subtraction = first - second - carry;
-            carry = subtraction < i && subtraction != 0 ? 1 : 0;
-            result.addFirst(subtraction < i & subtraction != 0 ? subtraction + (i + 1) : subtraction);
+                    factorialNumber.inNumber.remove(0) : 0;
+            Integer subtraction = Math.abs(first - second + carry);
+            carry = subtraction < i && subtraction != 0 ? -1 : 0;
+            result.add(subtraction < i & subtraction != 0 ? (i + 1) - subtraction : subtraction);
             i++;
         }
         this.inNumber = result;
         return this;
     }
 
-    public FactorialNumber increase() {
-            LinkedList<Integer> result = new LinkedList<>(this.inNumber);
-            result.addLast(1);
-        return new FactorialNumber(result);
+    public FactorialNumber increaseByOne() {
+        return this.addToFactorialNumberAnotherNumber(new FactorialNumber(new LinkedList<>(Arrays.asList(1))));
     }
 
-
-
-        public static void main (String[]args){
-            LinkedList<Integer> linkedList = new LinkedList<>();
-            linkedList.add(4);
-            linkedList.add(3);
-            linkedList.add(2);
-            linkedList.add(1);
-            LinkedList<Integer> linkedList1 = new LinkedList<>();
-            linkedList1.add(3);
-            linkedList1.add(2);
-            linkedList1.add(1);
-            FactorialNumber fc = new FactorialNumber(linkedList);
-            FactorialNumber fc1 = new FactorialNumber(linkedList1);
-        FactorialNumber fc2 = fc.addToFactorialNumberAnotherNumber(fc1);
-            System.out.println(fc2.inNumber);
-        }
+    public FactorialNumber decreaseByOne() {
+        return this.removeFromFactorialNumberAnotherNumber(new FactorialNumber(new LinkedList<>(Arrays.asList(1))));
+    }
 }
