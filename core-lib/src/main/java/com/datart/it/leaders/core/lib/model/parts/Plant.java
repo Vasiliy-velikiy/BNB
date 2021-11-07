@@ -11,22 +11,22 @@ public class Plant {
      */
 
     List<AssemblingLine> lines;
-    TransportLine transportLine = new TransportLine(1);
+    TransportLine transportLine = new TransportLine();
 
 
-    void Plant(int LinesCount){
+    void Plant(int LinesCount) {
 
     }
 
-    long highMetric(){
+    long highMetric() {
         return 0;
     }
 
-    long lowMetric(){
+    long lowMetric() {
         return 0;
     }
 
-    void Transport(){
+    void Transport() {
 
     }
 }
