@@ -62,24 +62,27 @@ public class FactorialNumber {
                 i++;
             }
             this.inNumber = result;
+            getInNumber();
             return this;
         }
 
     public FactorialNumber removeFromFactorialNumberAnotherNumber (FactorialNumber factorialNumber) {
         LinkedList<Integer> result = new LinkedList<>();
-        Integer carry = 0;
+        Integer decreaseByOne = 0;
         Integer i = 1;
-        while ((inNumber.size() > 0) || (factorialNumber.inNumber.size() > 0) || (carry != 0)) {
+        while ((inNumber.size() > 0) || (factorialNumber.inNumber.size() > 0) || (decreaseByOne != 0)) {
             Integer first = (inNumber.size() > 0) ? inNumber.remove(0) : 0;
             Integer second = (factorialNumber.inNumber.size() > 0) ?
                     factorialNumber.inNumber.remove(0) : 0;
-            Integer subtraction = first - second + carry;
-            carry = subtraction < i && subtraction != 0 ? -1 : 0;
+            Integer subtraction = first - second + decreaseByOne;
+            decreaseByOne = subtraction < 0 ? -1 : 0;
             result.add(subtraction < i & subtraction != 0 ? (i + 1) + subtraction : subtraction);
             i++;
         }
         this.inNumber = result;
+        getInNumber();
         return this;
+
     }
 
     public FactorialNumber increaseByOne() {
