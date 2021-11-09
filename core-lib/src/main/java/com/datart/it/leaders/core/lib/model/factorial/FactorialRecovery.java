@@ -1,6 +1,5 @@
 package com.datart.it.leaders.core.lib.model.factorial;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -30,6 +29,11 @@ public class FactorialRecovery {
      * @return ArrayList<Integer> rsl
      */
     public LinkedList<Integer> recoveryByFactorialNumber (FactorialNumber factorialNumber) {
+        if (factorialNumber.inNumber.size() != firstRearrangment.size() - 1) {
+            while (factorialNumber.inNumber.size() != firstRearrangment.size() - 1) {
+                factorialNumber.inNumber.addLast(0);
+            }
+        }
         List<Integer> inNumber = factorialNumber.getInNumber();
         Integer[] tempRsl = new Integer[firstRearrangment.size()];
         LinkedList<Integer> positionControl = new LinkedList<>();
@@ -43,6 +47,7 @@ public class FactorialRecovery {
             int index = i;
             tempRsl[positionControl.remove(index)] = firstRearrangment.get(counterOfFRNumberOut++);
         }
+
         tempRsl[positionControl.get(0)] = firstRearrangment.get(firstRearrangment.size() - 1);
         return new LinkedList<>(Arrays.asList(tempRsl));
     }

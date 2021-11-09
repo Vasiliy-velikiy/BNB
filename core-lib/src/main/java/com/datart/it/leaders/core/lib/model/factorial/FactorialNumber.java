@@ -76,13 +76,12 @@ public class FactorialNumber {
                     factorialNumber.inNumber.remove(0) : 0;
             Integer subtraction = first - second + decreaseByOne;
             decreaseByOne = subtraction < 0 ? -1 : 0;
-            result.add(subtraction < i & subtraction != 0 ? (i + 1) + subtraction : subtraction);
+            result.add(subtraction < 0 ? (i + 1) + subtraction : subtraction);
             i++;
         }
         this.inNumber = result;
         getInNumber();
         return this;
-
     }
 
     public FactorialNumber increaseByOne() {
