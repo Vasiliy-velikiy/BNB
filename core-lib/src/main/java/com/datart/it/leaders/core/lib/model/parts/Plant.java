@@ -10,11 +10,11 @@ public class Plant {
     getLowMetric()
      */
 
-    List<AssemblingLine> lines;
+    List<AssemblingLine> lines;   //список станков или производственных линий
     TransportLine transportLine = new TransportLine();
 
 
-    void Plant(int LinesCount) {
+    void Plant(int linesCount) {        //?? метод создания  производствен линий?
 
     }
 
