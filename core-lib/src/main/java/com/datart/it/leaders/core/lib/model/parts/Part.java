@@ -12,8 +12,8 @@ public class Part{  //конкретная деталь которая запу�
         this.type=type;
     }
 
-    public Part(LinkedList<Work> currentWorkflow) {
-        this.currentWorkflow = currentWorkflow;
+    public Part(Integer id, PartType partType) {
+        currentWorkflow = new PartType(id).workflow;
     }
 
     public PartType getType() {
