@@ -28,13 +28,13 @@ public class AssemblingLine {
         int t = 0;
         List<Part> finishedParts = new LinkedList<>();
         while (t <= time) {
-                Part curPart = asmLine.get(0);
+                Part curPart = asmLine.remove(0);
                 t += curPart.currentWorkflow.get(0).getTime();
                 if (t <= time) {
                     finishedParts.add(curPart);
-                    asmLine.remove(0);
                 } else {
                     curPart.currentWorkflow.get(0).setTime(t - time);
+                    asmLine.add(curPart);
                 }
         }
         return finishedParts;
