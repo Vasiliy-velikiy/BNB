@@ -26,20 +26,17 @@ public class AssemblingLine {
     public List<Part> Process(int time) {
         int t = 0;
         int i = 0;
-        List<Part> finishedParts = null;
+        List<Part> finishedParts = new ArrayList<>();
         while (t <= time) {
             Part curPart = asmLine.get(i);
             t += curPart.currentWorkflow.get(0).getTime();
             if (t > time) {
                 curPart.currentWorkflow.get(0).setTime(t - time);
-                finishedParts.add(curPart);
                 break;
             }
-            curPart.currentWorkflow.get(0).setTime(t);
             finishedParts.add(curPart);
-            i++;
+            asmLine.remove(i++);
         }
         return finishedParts;
     }
-
 }
