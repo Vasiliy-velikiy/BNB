@@ -28,7 +28,6 @@ public class AssemblingLine {
         int t = 0;
         List<Part> finishedParts = new LinkedList<>();
         while (t <= time) {
-            if (asmLine.size() > 0) {
                 Part curPart = asmLine.get(0);
                 t += curPart.currentWorkflow.get(0).getTime();
                 if (t <= time) {
@@ -37,9 +36,6 @@ public class AssemblingLine {
                 } else {
                     curPart.currentWorkflow.get(0).setTime(t - time);
                 }
-            } else {
-                t = time + 1;
-            }
         }
         return finishedParts;
     }
