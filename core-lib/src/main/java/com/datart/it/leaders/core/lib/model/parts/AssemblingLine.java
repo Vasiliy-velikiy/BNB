@@ -1,13 +1,14 @@
 package com.datart.it.leaders.core.lib.model.parts;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class AssemblingLine {
 
     int id;
     int workTime = 0;
-    public List<Part> asmLine = new ArrayList<>();
+    public List<Part> asmLine = new LinkedList<>();
 
 
     public AssemblingLine(int id) {
@@ -25,17 +26,16 @@ public class AssemblingLine {
 
     public List<Part> Process(int time) {
         int t = 0;
-        int i = 0;
-        List<Part> finishedParts = new ArrayList<>();
+        List<Part> finishedParts = new LinkedList<>();
         while (t <= time) {
-            Part curPart = asmLine.get(i);
-            t += curPart.currentWorkflow.get(0).getTime();
-            if (t > time) {
-                curPart.currentWorkflow.get(0).setTime(t - time);
-                break;
-            }
-            finishedParts.add(curPart);
-            asmLine.remove(i++);
+                Part curPart = asmLine.get(0);
+                t += curPart.currentWorkflow.get(0).getTime();
+                if (t <= time) {
+                    finishedParts.add(curPart);
+                    asmLine.remove(0);
+                } else {
+                    curPart.currentWorkflow.get(0).setTime(t - time);
+                }
         }
         return finishedParts;
     }
