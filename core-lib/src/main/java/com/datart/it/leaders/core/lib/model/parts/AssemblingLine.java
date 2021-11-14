@@ -8,7 +8,7 @@ public class AssemblingLine {
 
     int id;
     int workTime = 0;
-    public List<Part> asmLine = new LinkedList<>();
+    public LinkedList<Part> asmLine = new LinkedList<>();
 
 
     public AssemblingLine(int id) {
@@ -34,7 +34,7 @@ public class AssemblingLine {
                     finishedParts.add(curPart);
                 } else {
                     curPart.currentWorkflow.get(0).setTime(t - time);
-                    asmLine.add(curPart);
+                    asmLine.addFirst(curPart);
                 }
         }
         return finishedParts;
