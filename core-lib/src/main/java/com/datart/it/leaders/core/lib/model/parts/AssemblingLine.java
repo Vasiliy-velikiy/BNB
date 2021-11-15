@@ -15,7 +15,8 @@ public class AssemblingLine {
     }
 
     public void addPart(Part part){  //добавить деталь на линию сборки
-        asmLine.add(part);     //почему увелич только по 1 позиции?
+        asmLine.add(part);
+                                            //почему увелич только по 1 позиции?
         workTime += part.currentWorkflow.get(0).getTime();  //общее время обработки  увеличить НА время текущей работы  у конкретной детали
     }
 

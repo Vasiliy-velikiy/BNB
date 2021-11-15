@@ -11,6 +11,6 @@ public class Test {
         AssemblingLine assemblingLine4=new AssemblingLine(4);
         AssemblingLine assemblingLine5=new AssemblingLine(5);
 
-        Work
+
     }
 }
