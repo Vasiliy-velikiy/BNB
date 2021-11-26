@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Objects;
 
 public class FactorialNumber {
-    final LinkedList<Integer> inNumber;
+        final LinkedList<Integer> inNumber;
 
     public FactorialNumber (LinkedList<Integer> inNumber) {
         //является числом в фк системе
