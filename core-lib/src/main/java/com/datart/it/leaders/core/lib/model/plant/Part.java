@@ -1,12 +1,17 @@
 package com.datart.it.leaders.core.lib.model.plant;
 
-public class Part{  //конкретная деталь которая запускаеися на конвеер прямо сейчас
-    private Integer id; //индентификатор детали
-    private PartType type; //тип детали
+import java.util.LinkedList;
+import java.util.List;
 
-    public Part(Integer id, PartType type){
+public class Part {
+    private Integer id;
+    private PartType partType;
+    private  List<Work> currentWorkflow;
+
+    public Part(Integer id, PartType partType) {
         this.id=id;
-        this.type=type;
+        this.partType=partType;
+        this.currentWorkflow = new LinkedList<>(partType.getWorkflow());
     }
 
     public Integer getId() {
@@ -17,11 +22,19 @@ public class Part{  //конкретная деталь которая запу�
         this.id = id;
     }
 
-    public PartType getType() {
-        return type;
+    public PartType getPartType() {
+        return partType;
     }
 
-    public void setType(PartType type) {
-        this.type = type;
+    public void setPartType(PartType partType) {
+        this.partType = partType;
+    }
+
+    public List<Work> getCurrentWorkflow() {
+        return currentWorkflow;
+    }
+
+    public void setCurrentWorkflow(List<Work> currentWorkflow) {
+        this.currentWorkflow = currentWorkflow;
     }
 }
