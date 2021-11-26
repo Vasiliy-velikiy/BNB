@@ -11,7 +11,7 @@ public class FactorialNumber {
     /**
      * факториальное число,хранится в структуре данных LinkedList
      */
-    LinkedList<Integer> inNumber;
+    private List<Integer> value;
 
     /**
      * факториальное число, инициализируется в кострукторе,в нем так же находится проверка ,что число в фк системе счисления
@@ -20,75 +20,77 @@ public class FactorialNumber {
      *
      * @param inNumber
      */
-    public FactorialNumber(LinkedList<Integer> inNumber) {
+    public FactorialNumber(List<Integer> inNumber) {
         //переворачиваем массив
         boolean isBadFactor = IntStream.rangeClosed(1, inNumber.size())
                 .anyMatch(i -> {
-                    return inNumber.get(inNumber.size() - i) >= i+1;
+                    return inNumber.get(inNumber.size() - i) >= i + 1;
                 });
         if (isBadFactor) {
             throw new IllegalArgumentException("Wrong factor array");
         }
-        this.inNumber = inNumber;
-        Collections.reverse(this.inNumber);
+        this.value = inNumber;
+        Collections.reverse(this.value);
     }
 
-    public List<Integer> getInNumber() {
-        List<Integer> retval = inNumber.stream()
+    public List<Integer> getValue() {
+        List<Integer> retval = value.stream()
                 .collect(Collectors.toList());
         Collections.reverse(retval);
         return retval;
     }
 
-        /**
-         * сравниваем списки на идентичность
-         * @param factorialNumber
-         * @return false если числа не соответствуют
-         */
-        public boolean equals (FactorialNumber factorialNumber){
-            return inNumber.equals(factorialNumber.inNumber);
-        }
+    /**
+     * сравниваем списки на идентичность
+     *
+     * @param factorialNumber
+     * @return false если числа не соответствуют
+     */
+    public boolean equals(FactorialNumber factorialNumber) {
+        return value.equals(factorialNumber.value);
+    }
 
-    public FactorialNumber addToFactorialNumberAnotherNumber (FactorialNumber factorialNumber) {
-            LinkedList<Integer> result = new LinkedList<>();
-            Integer carry = 0;
-            Integer i = 1;
-            while ((inNumber.size() > 0) || (factorialNumber.inNumber.size() > 0) || (carry != 0)) {
-                Integer first = (inNumber.size() > 0) ? inNumber.remove(0) : 0;
-                Integer second = (factorialNumber.inNumber.size() > 0) ? factorialNumber.inNumber.remove(0) : 0;
-                Integer sum = first + second + carry;
-                carry = sum > i ? 1 : 0;
-                result.add(sum > i ? sum - (i + 1) : sum);
-                i++;
-            }
-            this.inNumber = result;
-            getInNumber();
-            return this;
+    public FactorialNumber add(FactorialNumber factorialNumber) {
+        List<Integer> firstValue = new LinkedList<>(value);
+        List<Integer> secondValue = new LinkedList<>(factorialNumber.value);
+        List<Integer> result = new LinkedList<>();
+        Integer carry = 0;
+        Integer i = 1;
+        while ((firstValue.size() > 0) || (secondValue.size() > 0) || (carry != 0)) {
+            Integer first = (firstValue.size() > 0) ? firstValue.remove(0) : 0;
+            Integer second = (secondValue.size() > 0) ? secondValue.remove(0) : 0;
+            Integer sum = first + second + carry;
+            carry = sum > i ? 1 : 0;
+            result.add(sum > i ? sum - (i + 1) : sum);
+            i++;
         }
+        Collections.reverse(result);
+        return new FactorialNumber(result);
+    }
 
-    public FactorialNumber removeFromFactorialNumberAnotherNumber (FactorialNumber factorialNumber) {
-        LinkedList<Integer> result = new LinkedList<>();
+    public FactorialNumber sub(FactorialNumber factorialNumber) {
+        List<Integer> firstValue = new LinkedList<>(value);
+        List<Integer> secondValue = new LinkedList<>(factorialNumber.value);
+        List<Integer> result = new LinkedList<>();
         Integer decreaseByOne = 0;
         Integer i = 1;
-        while ((inNumber.size() > 0) || (factorialNumber.inNumber.size() > 0) || (decreaseByOne != 0)) {
-            Integer first = (inNumber.size() > 0) ? inNumber.remove(0) : 0;
-            Integer second = (factorialNumber.inNumber.size() > 0) ?
-                    factorialNumber.inNumber.remove(0) : 0;
+        while ((firstValue.size() > 0) || (secondValue.size() > 0) || (decreaseByOne != 0)) {
+            Integer first = (firstValue.size() > 0) ? firstValue.remove(0) : 0;
+            Integer second = (secondValue.size() > 0) ? secondValue.remove(0) : 0;
             Integer subtraction = first - second + decreaseByOne;
             decreaseByOne = subtraction < 0 ? -1 : 0;
             result.add(subtraction < 0 ? (i + 1) + subtraction : subtraction);
             i++;
         }
-        this.inNumber = result;
-        getInNumber();
-        return this;
+        Collections.reverse(result);
+        return new FactorialNumber(result);
     }
 
-    public FactorialNumber increaseByOne() {
-        return this.addToFactorialNumberAnotherNumber(new FactorialNumber(new LinkedList<>(Arrays.asList(1))));
+    public FactorialNumber inc() {
+        return this.add(new FactorialNumber(new LinkedList<>(Arrays.asList(1))));
     }
 
-    public FactorialNumber decreaseByOne() {
-        return this.removeFromFactorialNumberAnotherNumber(new FactorialNumber(new LinkedList<>(Arrays.asList(1))));
+    public FactorialNumber dec() {
+        return this.sub(new FactorialNumber(new LinkedList<>(Arrays.asList(1))));
     }
 }

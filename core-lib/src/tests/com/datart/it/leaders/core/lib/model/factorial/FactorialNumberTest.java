@@ -14,15 +14,15 @@ public class FactorialNumberTest {
         FactorialNumber fN1 = new FactorialNumber(new LinkedList<>(Arrays.asList(4, 3, 2, 1)));
         FactorialNumber fN2 = new FactorialNumber(new LinkedList<>(Arrays.asList(3, 2, 1)));
         FactorialNumber fNRsl = new FactorialNumber(new LinkedList<>(Arrays.asList(1, 0, 3, 2, 0)));
-        Assert.assertEquals( fN1.addToFactorialNumberAnotherNumber(fN2).inNumber , fNRsl.inNumber);
+        Assert.assertEquals(fNRsl.getValue(), fN1.add(fN2).getValue());
     }
 
     @Test
     public void whenRemove1() {
         FactorialNumber fN1 = new FactorialNumber(new LinkedList<>(Arrays.asList(1, 0, 1)));
         FactorialNumber fNR2 = new FactorialNumber(new LinkedList<>(Arrays.asList(1)));
-        FactorialNumber fNRsl = new FactorialNumber(new LinkedList<>(Arrays.asList(1,0,0)));
-        Assert.assertEquals( fN1.removeFromFactorialNumberAnotherNumber(fNR2).inNumber , fNRsl.inNumber);
+        FactorialNumber fNRsl = new FactorialNumber(new LinkedList<>(Arrays.asList(1, 0, 0)));
+        Assert.assertEquals(fNRsl.getValue(), fN1.sub(fNR2).getValue());
     }
 
     @Test
@@ -30,21 +30,21 @@ public class FactorialNumberTest {
         FactorialNumber fN1 = new FactorialNumber(new LinkedList<>(Arrays.asList(4, 0, 2, 0)));
         FactorialNumber fN2 = new FactorialNumber(new LinkedList<>(Arrays.asList(3, 2, 1)));
         FactorialNumber fNRsl = new FactorialNumber(new LinkedList<>(Arrays.asList(1, 0, 0, 1, 1)));
-        Assert.assertEquals( fN1.addToFactorialNumberAnotherNumber(fN2).inNumber , fNRsl.inNumber);
+        Assert.assertEquals(fNRsl.getValue(), fN1.add(fN2).getValue());
     }
 
     @Test
     public void whenIncreaseByOne() {
         FactorialNumber fN1 = new FactorialNumber(new LinkedList<>(Arrays.asList(4, 0, 2, 1)));
         FactorialNumber fNRsl = new FactorialNumber(new LinkedList<>(Arrays.asList(4, 1, 0, 0)));
-        Assert.assertEquals( fN1.increaseByOne().inNumber , fNRsl.inNumber);
+        Assert.assertEquals(fNRsl.getValue(),fN1.inc().getValue() );
     }
 
     @Test
     public void whenDecresseByOne() {
         FactorialNumber fN1 = new FactorialNumber(new LinkedList<>(Arrays.asList(4, 0, 2, 1)));
         FactorialNumber fNRsl = new FactorialNumber(new LinkedList<>(Arrays.asList(4, 0, 2, 0)));
-        Assert.assertEquals( fN1.decreaseByOne().inNumber , fNRsl.inNumber);
+        Assert.assertEquals(fNRsl.getValue(),fN1.dec().getValue() );
     }
 
     @Test
@@ -52,7 +52,7 @@ public class FactorialNumberTest {
         FactorialNumber fN1 = new FactorialNumber(new LinkedList<>(Arrays.asList(1, 0, 0, 1)));
         FactorialNumber fNR2 = new FactorialNumber(new LinkedList<>(Arrays.asList(0, 1, 1, 0)));
         FactorialNumber fNRsl = new FactorialNumber(new LinkedList<>(Arrays.asList(0, 2, 2, 1)));
-        Assert.assertEquals( fN1.removeFromFactorialNumberAnotherNumber(fNR2).inNumber , fNRsl.inNumber);
+        Assert.assertEquals( fNRsl.getValue(),fN1.sub(fNR2).getValue());
     }
 
     @Test
@@ -60,6 +60,6 @@ public class FactorialNumberTest {
         FactorialNumber fN1 = new FactorialNumber(new LinkedList<>(Arrays.asList(1, 0, 0, 0)));
         FactorialNumber fNR2 = new FactorialNumber(new LinkedList<>(Arrays.asList(0, 0, 1, 0)));
         FactorialNumber fNRsl = new FactorialNumber(new LinkedList<>(Arrays.asList(0, 3, 2, 0)));
-        Assert.assertEquals( fN1.removeFromFactorialNumberAnotherNumber(fNR2).inNumber , fNRsl.inNumber);
+        Assert.assertEquals(fNRsl.getValue(),fN1.sub(fNR2).getValue());
     }
 }
