@@ -1,4 +1,4 @@
-package com.datart.it.leaders.core.lib.model.node;
+package com.datart.it.leaders.core.lib.model.branch;
 
 import org.junit.Test;
 

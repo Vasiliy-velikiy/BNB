@@ -1,4 +1,4 @@
-package com.datart.it.leaders.core.lib.model.node;
+package com.datart.it.leaders.core.lib.model.branch;
 //Сущность "ветка" внутри это массив с одним или двумя указателями для удобства ветвления.
 
 import java.util.LinkedList;
