@@ -1,4 +1,4 @@
-package com.datart.it.leaders.core.lib.model.parts;
+package com.datart.it.leaders.core.lib.model.plant;
 
 import java.util.ArrayList;
 import java.util.List;
