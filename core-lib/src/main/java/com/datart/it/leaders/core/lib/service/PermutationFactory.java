@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class PermutationFactory {
-    final List<Object> originalValue;
+    private final List<Object> originalValue;
 
     /**
      * Инициализация конструктора, List<Object>, в котором находятся элементы начальной перестановки

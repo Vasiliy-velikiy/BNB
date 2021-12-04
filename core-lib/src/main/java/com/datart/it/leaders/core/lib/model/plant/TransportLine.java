@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class TransportLine {
-    public List<TransportBox> boxes;
+    private List<TransportBox> boxes;
 
     public TransportLine() {
         boxes = new LinkedList<>();

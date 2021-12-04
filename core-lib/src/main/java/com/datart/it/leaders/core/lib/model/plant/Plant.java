@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 
 public class Plant {
 
-    List<AssemblingLine> lines;   //список станков или производственных линий
-    TransportLine transportLine;
+    private List<AssemblingLine> lines;   //список станков или производственных линий
+    private TransportLine transportLine;
 
     public Plant(Integer cnt) {
         lines = new LinkedList<>();
