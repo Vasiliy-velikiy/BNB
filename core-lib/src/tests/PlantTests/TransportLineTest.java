@@ -1,4 +1,0 @@
-package PlantTests;
-
-class TransportLineTest {
-}

@@ -1,11 +1,13 @@
 package com.datart.it.leaders.core.lib.model.plant;
+
 import java.util.List;
+import java.util.Optional;
 
-public class PartType{
-    private Integer id; //индентификатор типа
-    private List<Work> workflow; //порядок и время обработки детали.( через сколько и каких линий должна пройти деталь чтобы быть готовой)
+public class PartType {
+    private final Integer id; //индентификатор типа
+    private final Work[] workflow; //порядок и время обработки детали.( через сколько и каких линий должна пройти деталь чтобы быть готовой)
 
-    public PartType(Integer id, List<Work> workflow) {
+    public PartType(Integer id, Work[] workflow) {
         this.id = id;
         this.workflow = workflow;
     }
@@ -14,15 +16,11 @@ public class PartType{
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public List<Work> getWorkflow() {
-        return workflow;
-    }
-
-    public void setWorkflow(List<Work> workflow) {
-        this.workflow = workflow;
+    public Optional<Work> getWork(Integer pos) {
+        Work retval = null;
+        if (pos >= 0 && pos <= workflow.length-1) {
+            retval = workflow[pos];
+        }
+        return Optional.ofNullable(retval);
     }
 }

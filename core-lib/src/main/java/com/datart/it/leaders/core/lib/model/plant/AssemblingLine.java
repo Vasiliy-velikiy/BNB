@@ -14,28 +14,52 @@ public class AssemblingLine {
         this.id = id;
     }
 
-    public void addPart(Part part){
+    public void addPart(Part part) {
         line.add(part);
-        workTime += part.getCurrentWorkflow().get(0).getTime();
+        workTime += part.getWorkTime();
     }
 
-    public void addParts(List<Part> parts){
-        parts.stream().forEach(part->addPart(part));
+    public void addParts(List<Part> parts) {
+        parts.stream().forEach(part -> addPart(part));
     }
 
     public List<Part> Process(Integer time) {
-        Integer t = 0;
+        Integer curTime=time;
         List<Part> finishedParts = new LinkedList<>();
-        while (t <= time) {
-                Part curPart = line.remove(0);
-                t += curPart.getCurrentWorkflow().get(0).getTime();
-                if (t <= time) {
-                    finishedParts.add(curPart);
-                } else {
-                    curPart.getCurrentWorkflow().get(0).setTime(t - time);
-                    line.add(0,curPart);
-                }
+        while (curTime > 0) {
+            Part curPart = line.remove(0);
+            curTime = curPart.process(curTime);
+            if (curTime >= 0) {
+                finishedParts.add(curPart);
+            } else {
+                line.add(0, curPart);
+            }
         }
+        this.workTime -= time;
         return finishedParts;
+    }
+
+    public Integer getWorkTime() {
+        return workTime;
+    }
+
+    public void setWorkTime(Integer workTime) {
+        this.workTime = workTime;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public List<Part> getLine() {
+        return line;
+    }
+
+    public void setLine(List<Part> line) {
+        this.line = line;
     }
 }

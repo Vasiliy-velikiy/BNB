@@ -1,4 +1,4 @@
-package PlantTests;
+package com.datart.it.leaders.core.lib.model.plant;
 
 import org.junit.Test;
 

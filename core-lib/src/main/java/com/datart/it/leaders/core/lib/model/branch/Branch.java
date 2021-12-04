@@ -6,11 +6,9 @@ import java.util.List;
 
 public class Branch {
 
-    private List<Integer> sequence;
+    private List<Object> sequence;
     private Integer base;
     private Integer forkPointer;
-
-
 
     // Конструкторы пишут вначале, чтобы не бегать по коду и не искать как сделать объект
     public Branch(){
@@ -26,21 +24,20 @@ public class Branch {
     }
 
 
-    public List<Integer> getSequence() {
+    public List<Object> getSequence() {
         return sequence;
     }
 
-    public int getBase() {
+    public Integer getBase() {
         return base;
     }
 
-    public int getForkPointer() {
+    public Integer getForkPointer() {
         return forkPointer;
     }
 
-    public void setSequence(List<Integer> sequence) {
+    public void setSequence(List<Object> sequence) {
         this.sequence.addAll(sequence);
-
     }
 
     public void setBase(Integer base) {
@@ -51,16 +48,15 @@ public class Branch {
         this.forkPointer = forkPointer;
     }
 
-
     public Branch fork(){
 
-        if ((base >= sequence.size())||(forkPointer >= sequence.size())){
+        if ((base >= sequence.size()-1)||(forkPointer >= sequence.size()-1)){
             return null;
         }
         forkPointer++;
         Branch newBranch =new Branch(this);
-        List<Integer> newList = newBranch.getSequence();
-        Integer forkElement = newList.remove((int) forkPointer);    //remove(indicatorTwo);
+        List<Object> newList = newBranch.getSequence();
+        Object forkElement = newList.remove((int) forkPointer);    //remove(indicatorTwo);
         newList.add(base +1,forkElement);
         newBranch.setBase(base +1);
         newBranch.setForkPointer(base +2);

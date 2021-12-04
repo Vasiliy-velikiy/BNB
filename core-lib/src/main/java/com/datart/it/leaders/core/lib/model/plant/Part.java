@@ -1,40 +1,55 @@
 package com.datart.it.leaders.core.lib.model.plant;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Optional;
 
 public class Part {
-    private Integer id;
-    private PartType partType;
-    private  List<Work> currentWorkflow;
+    private final Integer id;
+    private final PartType partType;
+    private Integer workTime;
+    private Integer curpos;
 
     public Part(Integer id, PartType partType) {
-        this.id=id;
-        this.partType=partType;
-        this.currentWorkflow = new LinkedList<>(partType.getWorkflow());
+        this.id = id;
+        this.partType = partType;
+        curpos = 0;
+        partType.getWork(curpos).ifPresent(work -> {
+            this.workTime = work.getTime();
+        });
+
     }
 
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public PartType getPartType() {
         return partType;
     }
 
-    public void setPartType(PartType partType) {
-        this.partType = partType;
+    public Integer process(Integer time) {
+        Integer retTime=time-workTime;
+        if (retTime >=0) {
+            curpos++;
+            partType.getWork(curpos).ifPresent(work -> {
+                workTime = work.getTime();
+            });
+        }else{
+            workTime -=time;
+        }
+        return (retTime);
     }
 
-    public List<Work> getCurrentWorkflow() {
-        return currentWorkflow;
+    public Boolean isFinishd(){
+        return !partType.getWork(curpos).isPresent();
     }
 
-    public void setCurrentWorkflow(List<Work> currentWorkflow) {
-        this.currentWorkflow = currentWorkflow;
+    public Integer getWorkTime() {
+        return workTime;
+    }
+    public Integer getLastOperationTime() {
+        return partType.getWork(curpos - 1).map(work -> work.getTime()).orElse(0);
+    }
+    public Integer getLine(){
+        return partType.getWork(curpos).map(work->work.getLine()).orElse(0);
     }
 }

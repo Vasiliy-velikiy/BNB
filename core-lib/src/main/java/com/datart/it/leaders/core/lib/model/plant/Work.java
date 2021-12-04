@@ -2,11 +2,16 @@ package com.datart.it.leaders.core.lib.model.plant;
 
 public class Work {
     private Integer line; //линия
-    private Integer time ;//время обработки
+    private Integer time;//время обработки
 
     public Work(Integer line, Integer time) {
         this.line = line;
         this.time = time;
+    }
+
+    public Work(Work work) {
+        this.line = work.line;
+        this.time = work.time;
     }
 
     public Integer getLine() {
