@@ -56,9 +56,12 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>2.3.5.RELEASE</version>
+				<version>2.5.5</version>
 			</plugin>
 		</plugins>
 	</build>
-
+	<properties>
+		<maven.compiler.source>8</maven.compiler.source>
+		<maven.compiler.target>8</maven.compiler.target>
+	</properties>
 </project>
