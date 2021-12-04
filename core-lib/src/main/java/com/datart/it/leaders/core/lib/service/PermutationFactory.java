@@ -22,6 +22,7 @@ public class PermutationFactory {
 
 
     /**
+     * Получит перестановку по номеру
      * @param factorialNumber
      * @return
      */

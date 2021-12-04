@@ -13,40 +13,51 @@ public class BranchAndBound {
     private Long lBound;
 
     public BranchAndBound(Integer lineCount) {
-        stack=new Stack<>();
-        plant=new Plant(lineCount);
-        lBound=Long.MAX_VALUE;
+        stack = new Stack<>();
+        plant = new Plant(lineCount);
+        lBound = Long.MAX_VALUE;
     }
 
-    public BNBResult process(Branch branch, Long metric){
-        lBound=metric;
+    //Найти перестановку с минимальной метрикой
+    public BNBResult process(Branch branch, Long metric) {
+        lBound = metric;
         stack.clear();
-        BNBResult result=null;
+        BNBResult result = null;
+
+        //Запихать в стек первоначальную перестановку
         stack.push(new BNBResult(branch, plant.lowMetric(branch), plant.highMetric(branch)));
-        while (!stack.isEmpty()){
+        //Пока в стеке есть перестановки для расчета
+        while (!stack.isEmpty()) {
+            //Получаем перестановку из стека
             BNBResult item = stack.pop();
-            if(lBound<item.gethMetric()){
+            //Если метрика перестановки больше текущего рекорда-перестановку выбрасываем(нет смысла вычислять заведомо худшие)
+            if (lBound < item.gethMetric()) {
                 continue;
             }
+            //форкаем ветку, если форкнуть не получилось, значит ветка обсчита до конца и ее выбрасываем
             Branch task = item.getBranch().fork();
-            if(task==null){
+            if (task == null) {
                 continue;
             }
+            //Если ветка обсчитана не до конца вернем ее в стек
             stack.push(item);
+
+            //Вычислим hMetric -метрику до указателя base, и если даже она больше текущего рекорда, то считать дальше не стоит
             Long hMetric = plant.highMetric(task);
-            if (lBound< hMetric){
+            if (lBound < hMetric) {
                 continue;
             }
+            //Вычислим полную метрику перестановки, и если она МЕНЬШЕ рекорда-обновим рекорд
             Long lMetric = plant.lowMetric(task);
-            if(lBound>lMetric){
-                lBound=lMetric;
-                result=new BNBResult(task,lMetric,hMetric);
+            if (lBound > lMetric) {
+                lBound = lMetric;
+                result = new BNBResult(task, lMetric, hMetric);
             }
-            stack.push(new BNBResult(task,lMetric,hMetric));
+            //Запихнем перестановку в стек, в следующий раз начнем форкать ее
+            stack.push(new BNBResult(task, lMetric, hMetric));
         }
         return result;
     }
-
 
 
 }

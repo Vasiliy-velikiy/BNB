@@ -20,17 +20,21 @@ public class AssemblingLine {
     }
 
     public void addParts(List<Part> parts) {
-        parts.stream().forEach(part -> addPart(part));
+        parts.addAll(parts);
     }
 
+    //Обработать все детали которые успеем за время  time
     public List<Part> Process(Integer time) {
         Integer curTime=time;
         List<Part> finishedParts = new LinkedList<>();
+        //Пока есть время работаем
         while (curTime > 0) {
             Part curPart = line.remove(0);
             curTime = curPart.process(curTime);
+            //если после обработки осталось свободное время значит деталь готова - отправить ее на транспортер
             if (curTime >= 0) {
                 finishedParts.add(curPart);
+            //иначе деталь еще не доделана и надо вернуть на линию обработки
             } else {
                 line.add(0, curPart);
             }

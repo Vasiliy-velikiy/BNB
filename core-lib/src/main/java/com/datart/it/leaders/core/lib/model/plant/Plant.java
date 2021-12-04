@@ -56,18 +56,24 @@ public class Plant {
         lines.stream().forEach(line -> line.getLine().clear());
     }
 
+    //Запустить фабрику на изготовление деталей
     private Long process() {
         Long metric = 0L;
+        //получит минимальное время работы линии(пустые линии не считаем)
         Integer t = lines.stream().map(line -> line.getWorkTime()).filter(i -> i > 0).min(Integer::compare).get();
+        //Если все линии пустые-значит закончили обработку всех деталей
         while (t > 0) {
             metric += t;
+            //поработать время t и выгрузить делати на транспортер
             for (AssemblingLine line : lines) {
                 if (line.getWorkTime()>0) {
                     transportLine.loadParts(line.Process(t));
                 }
             }
+            //Загрузить детали с транспортера на линии
             transportLine.Prepare();
             transport();
+            //получит минимальное время работы линии(пустые линии не считаем)
             t = lines.stream().map(line -> line.getWorkTime()).filter(i -> i > 0).min(Integer::compare).orElse(0);
         }
         return metric;
