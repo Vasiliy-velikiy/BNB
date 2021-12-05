@@ -9,6 +9,10 @@ public class BNBResult {
     private Long lMetric;
     private Long hMetric;
 
+
+    public BNBResult() {
+    }
+
     public BNBResult(Branch branch, Long lMetric, Long hMetric) {
         this.branch = branch;
         this.lMetric = lMetric;

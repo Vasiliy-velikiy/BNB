@@ -9,17 +9,24 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class PermutationFactory {
+
     private final List<Object> originalValue;
+
 
     /**
      * Инициализация конструктора, List<Object>, в котором находятся элементы начальной перестановки
      *
      * @param originalValue
      */
+
     public PermutationFactory(List<Object> originalValue) {
         this.originalValue = originalValue;
     }
 
+
+    public List<Object> getOriginalValue() {
+        return originalValue;
+    }
 
     /**
      * Получит перестановку по номеру
