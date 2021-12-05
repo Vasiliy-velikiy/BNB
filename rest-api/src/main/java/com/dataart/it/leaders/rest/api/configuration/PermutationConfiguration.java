@@ -20,29 +20,18 @@ public class PermutationConfiguration {
     }
 
     @Bean
-    public PermitationServiceImp getInitialPermutation() {
-        return new PermitationServiceImp(getPermutationFactory());
-    }
-
-    @Bean
     public BNBResult getBnbresult(){
         return new BNBResult();
     }
 
     @Bean
-    public PermutationController getControllerPermutation() {
-        return new PermutationController(getInitialPermutation(),getBnbresult());
+    public PermitationServiceImp getInitialPermutation() {
+        return new PermitationServiceImp(getPermutationFactory(),getBnbresult());
     }
 
-   /* @Bean
+    @Bean
     public PermutationController getControllerPermutation() {
         return new PermutationController(getInitialPermutation());
-    }*/
-
-    /* @Bean
-    public PermutationController getControllerMetric(){
-        return new PermutationController(getBnbresult());
-    }*/
-
+    }
 
 }

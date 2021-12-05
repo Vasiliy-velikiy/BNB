@@ -40,6 +40,7 @@ public class FactorialNumber {
         return retval;
     }
 
+
     /**
      * сравниваем списки на идентичность
      *

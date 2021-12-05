@@ -8,5 +8,3 @@ public interface PermutationService {
     Long getHighMetric();
     Long getLowMetric();
 }
-
-q

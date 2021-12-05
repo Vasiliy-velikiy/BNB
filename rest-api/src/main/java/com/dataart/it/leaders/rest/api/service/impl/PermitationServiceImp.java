@@ -21,14 +21,16 @@ public class PermitationServiceImp implements PermutationService {
         this.bnbResult = bnbResult;
     }
 
+    public PermitationServiceImp(PermutationFactory permutationFactory, BNBResult bnbResult) {
+        this.permutationFactory = permutationFactory;
+        this.bnbResult = bnbResult;
+    }
 
     @Override
     public List getInitialPermutation() {
         return permutationFactory.getOriginalValue();
 
     }
-
-
 
     @Override
     public Long getHighMetric() {
