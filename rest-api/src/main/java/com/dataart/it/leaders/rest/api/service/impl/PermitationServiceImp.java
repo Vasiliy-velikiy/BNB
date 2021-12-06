@@ -11,13 +11,9 @@ import java.util.List;
 public class PermitationServiceImp implements PermutationService {
     private final BNBResult bnbResult;
 
-
-
-
     public PermitationServiceImp(BNBResult bnbResult) {
         this.bnbResult = bnbResult;
     }
-
 
     @Override
     public void createInitialPermutation(List<Object> initilPermutation) {

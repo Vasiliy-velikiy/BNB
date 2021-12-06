@@ -6,7 +6,7 @@ import com.datart.it.leaders.core.lib.model.bound.BNBResult;
 import com.datart.it.leaders.core.lib.model.branch.Branch;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
+
 
 @Configuration
 public class PermutationConfiguration {
