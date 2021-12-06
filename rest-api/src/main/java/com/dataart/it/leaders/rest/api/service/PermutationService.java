@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface PermutationService {
 
-    List getInitialPermutation();
-    Long getHighMetric();
-    Long getLowMetric();
+    void createInitialPermutation(List initilPermutation);
+
+    void createLowMetric(Long metric);
 }

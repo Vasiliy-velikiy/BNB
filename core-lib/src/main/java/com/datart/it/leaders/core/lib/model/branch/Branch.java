@@ -15,6 +15,12 @@ public class Branch {
        this.sequence =new LinkedList<>();
     }
 
+    public Branch(List<Object> sequence) {
+        this.sequence = sequence;
+        this.base = 0;
+        this.forkPointer =0;
+    }
+
     //конструктор копирования
     public Branch(Branch srcBranch){
         this.base = srcBranch.base;

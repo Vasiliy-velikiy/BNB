@@ -23,11 +23,6 @@ public class PermutationFactory {
         this.originalValue = originalValue;
     }
 
-
-    public List<Object> getOriginalValue() {
-        return originalValue;
-    }
-
     /**
      * Получит перестановку по номеру
      * @param factorialNumber

@@ -2,43 +2,32 @@ package com.dataart.it.leaders.rest.api.service.impl;
 
 import com.dataart.it.leaders.rest.api.service.PermutationService;
 import com.datart.it.leaders.core.lib.model.bound.BNBResult;
+import com.datart.it.leaders.core.lib.model.branch.Branch;
 import com.datart.it.leaders.core.lib.service.PermutationFactory;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class PermitationServiceImp implements PermutationService {
-    private PermutationFactory permutationFactory;
-    private BNBResult bnbResult;
-
-    public PermitationServiceImp() {
-    }
-
-    public PermitationServiceImp(PermutationFactory permutationFactory) {
-        this.permutationFactory = permutationFactory;
-    }
+   private BNBResult bnbResult;
+   private Branch branch;
 
     public PermitationServiceImp(BNBResult bnbResult) {
         this.bnbResult = bnbResult;
     }
 
-    public PermitationServiceImp(PermutationFactory permutationFactory, BNBResult bnbResult) {
-        this.permutationFactory = permutationFactory;
-        this.bnbResult = bnbResult;
+    public PermitationServiceImp(Branch branch) {
+        this.branch = branch;
+    }
+
+
+    @Override
+    public void createInitialPermutation(List initilPermutation) {
+      branch.setSequence(initilPermutation);
     }
 
     @Override
-    public List getInitialPermutation() {
-        return permutationFactory.getOriginalValue();
-
-    }
-
-    @Override
-    public Long getHighMetric() {
-        return bnbResult.gethMetric();
-    }
-
-    @Override
-    public Long getLowMetric() {
-        return bnbResult.getlMetric();
+    public void createLowMetric(Long metric) {
+        bnbResult.sethMetric(metric);
     }
 }
