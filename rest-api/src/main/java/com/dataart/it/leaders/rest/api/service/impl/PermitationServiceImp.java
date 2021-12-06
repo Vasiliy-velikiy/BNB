@@ -9,25 +9,19 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class PermitationServiceImp implements PermutationService {
-   private BNBResult bnbResult;
-   private Branch branch;
+    private final BNBResult bnbResult;
+
+
+
 
     public PermitationServiceImp(BNBResult bnbResult) {
         this.bnbResult = bnbResult;
     }
 
-    public PermitationServiceImp(Branch branch) {
-        this.branch = branch;
-    }
-
-    public PermitationServiceImp(BNBResult bnbResult, Branch branch) {
-        this.bnbResult = bnbResult;
-        this.branch = branch;
-    }
 
     @Override
-    public void createInitialPermutation(List initilPermutation) {
-      branch.setSequence(initilPermutation);
+    public void createInitialPermutation(List<Object> initilPermutation) {
+        bnbResult.getBranch().setSequence(initilPermutation);
     }
 
     @Override
