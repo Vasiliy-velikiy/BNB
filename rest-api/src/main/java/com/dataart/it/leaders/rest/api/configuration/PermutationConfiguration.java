@@ -31,8 +31,18 @@ public class PermutationConfiguration {
 
     @Bean
     public PermitationServiceImp getInitialPermutation() {
+        return new PermitationServiceImp(getBnbresult(),getBranch());
+    }
+
+   /* @Bean
+    public PermitationServiceImp getInitialPermutation() {
         return new PermitationServiceImp(getBnbresult());
     }
+
+    @Bean
+    public PermitationServiceImp getInitialPermutation1() {
+        return new PermitationServiceImp(getBranch());
+    }*/
 
     @Bean
     public PermutationController getControllerPermutation() {

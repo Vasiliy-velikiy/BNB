@@ -20,6 +20,10 @@ public class PermitationServiceImp implements PermutationService {
         this.branch = branch;
     }
 
+    public PermitationServiceImp(BNBResult bnbResult, Branch branch) {
+        this.bnbResult = bnbResult;
+        this.branch = branch;
+    }
 
     @Override
     public void createInitialPermutation(List initilPermutation) {
