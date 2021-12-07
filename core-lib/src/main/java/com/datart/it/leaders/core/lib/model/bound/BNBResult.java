@@ -8,8 +8,7 @@ public class BNBResult {
     private Branch branch;
     private Long lMetric;
     private Long hMetric;
-
-
+  
     public BNBResult() {
     }
 
