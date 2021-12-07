@@ -63,7 +63,7 @@ public class PermutationControllerTest {
     public void createMetric() {
         Long metric = 78l;
         RestTemplate restTemplate = new RestTemplate();
-        String fooResourceUrl = "http://localhost:9090/createMetric";
+        String fooResourceUrl = "http://localhost:"+port+"/createInitialPermutation";
         ResponseEntity<String> response = restTemplate.postForEntity(fooResourceUrl, metric,String.class);
         Assert.assertTrue(response.getStatusCode()== HttpStatus.OK);
     }
