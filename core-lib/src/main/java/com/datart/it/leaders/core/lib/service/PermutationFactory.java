@@ -28,16 +28,36 @@ public class PermutationFactory {
      * @param factorialNumber
      * @return
      */
-    public List<Object> getPermutation(FactorialNumber factorialNumber) {
+    public List<Object> getPermutationByNumber(FactorialNumber factorialNumber) {
+        List<Object> list = originalValue.stream().collect(Collectors.toList());
         List<Integer> number = factorialNumber.getValue();
-        Object[] result = new Object[originalValue.size()];
-        List<Integer> positionControl = IntStream.rangeClosed(0, originalValue.size() - 1).boxed().collect(Collectors.toList());
-
+        number.add(0);
+        List<Object> result = new LinkedList<>();
         for (Integer i = 0; i < originalValue.size(); i++) {
-            int index = i < number.size() ? number.get(i) : 0;
-            result[positionControl.remove(index)] = originalValue.get(i);
+            int index = number.size() < list.size() ?  0:number.remove(0);
+            result.add(list.remove(index));
         }
-
-        return Arrays.asList(result);
+        return result;
     }
+
+    /**
+     * Получит номер перестановки
+     * @param permutation
+     * @return
+     */
+    public FactorialNumber getNumberOfPermutation(List<Object> permutation) {
+        List<Object> list = originalValue.stream().collect(Collectors.toList());
+        List<Integer>result = new LinkedList<>();
+        for (Integer i = 0; i < originalValue.size()-1; i++) {
+            int index = list.indexOf(permutation.remove(0));
+            list.remove(index);
+            result.add(index);
+        }
+        while(!result.isEmpty() && result.get(0)==0){
+            result.remove(0);
+        }
+        return new FactorialNumber(result);
+    }
+
+
 }
