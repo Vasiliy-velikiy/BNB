@@ -2,7 +2,6 @@ package tests.com.dataart.it.leaders.rest.api.controller;
 
 
 
-import com.dataart.it.leaders.rest.api.configuration.PermutationConfiguration;
 import com.dataart.it.leaders.rest.api.controller.PermutationControllerTestConfiguration;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;

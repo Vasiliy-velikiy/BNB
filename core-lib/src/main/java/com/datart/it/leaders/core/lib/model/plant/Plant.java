@@ -11,6 +11,7 @@ public class Plant {
     private List<AssemblingLine> lines;   //список станков или производственных линий
     private TransportLine transportLine;
 
+
     public Plant(Integer cnt) {
         lines = new LinkedList<>();
         transportLine = new TransportLine();
