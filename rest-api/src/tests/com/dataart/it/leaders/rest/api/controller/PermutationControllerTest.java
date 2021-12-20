@@ -36,7 +36,6 @@ RL в виде строки, четвертый параметр определ�
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) //анатирует как спринговый тест и которому нужно развернуть веб  контекс. Внимание на Randomport-он сам выберет свободный порт
 @AutoConfigureMockMvc      //спринг поднимает тестовый контекст в котором заглушками заткнуто отправка и получение http
 @ContextConfiguration(classes = PermutationControllerTestConfiguration.class)//считывание бинов в контекс
-
 public class PermutationControllerTest {
 
     @LocalServerPort
@@ -58,12 +57,12 @@ public class PermutationControllerTest {
 
         }
 
-    @Test
-    public void createMetric() {
-        Long metric = 78l;
-        RestTemplate restTemplate = new RestTemplate();
-        String fooResourceUrl = "http://localhost:"+port+"/createInitialPermutation";
-        ResponseEntity<String> response = restTemplate.postForEntity(fooResourceUrl, metric,String.class);
-        Assert.assertTrue(response.getStatusCode()== HttpStatus.OK);
-    }
+//    @Test
+//    public void createMetric() {
+//        Long metric = 78l;
+//        RestTemplate restTemplate = new RestTemplate();
+//        String fooResourceUrl = "http://localhost:"+port+"/createInitialPermutation";
+//        ResponseEntity<String> response = restTemplate.postForEntity(fooResourceUrl, metric,String.class);
+//        Assert.assertTrue(response.getStatusCode()== HttpStatus.OK);
+//    }
 }
