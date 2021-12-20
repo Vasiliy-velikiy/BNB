@@ -4,6 +4,7 @@ package com.dataart.it.leaders.rest.api.controller;
 import com.dataart.it.leaders.rest.api.service.RunJob;
 import com.dataart.it.leaders.rest.api.service.impl.PermitationServiceImp;
 import com.dataart.it.leaders.rest.api.service.impl.RunJobImpl;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,4 +35,5 @@ public class PermutationController {
     public void createMetric(Long metric){
         permutationService.createLowMetric(metric);
     }
+
 }

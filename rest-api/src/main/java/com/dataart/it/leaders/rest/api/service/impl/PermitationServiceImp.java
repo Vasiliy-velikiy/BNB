@@ -29,4 +29,5 @@ public class PermitationServiceImp implements PermutationService {
     public void createLowMetric(Long metric) {
         context.getBnbResult().sethMetric(metric);
     }
+
 }

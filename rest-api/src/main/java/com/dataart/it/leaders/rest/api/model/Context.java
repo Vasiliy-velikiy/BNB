@@ -2,7 +2,10 @@ package com.dataart.it.leaders.rest.api.model;
 
 
 import com.datart.it.leaders.core.lib.model.bound.BNBResult;
+import javafx.scene.transform.ShearBuilder;
 import org.springframework.stereotype.Component;
+
+import java.util.Map;
 
 @Component
 public class Context {
@@ -10,11 +13,22 @@ public class Context {
     private Integer count;
     private static Context instance;
 
+    //для хранения ответов живой не живой от вычислителей
+    private Map<String, Integer>mapAlive;
+
    private Context() {
     }
 
     public Context(BNBResult bnbResult) {
         this.bnbResult = bnbResult;
+    }
+
+    public Map<String, Integer> getMapAlive() {
+        return mapAlive;
+    }
+
+    public void setMapAlive(Map<String, Integer> mapAlive) {
+        this.mapAlive = mapAlive;
     }
 
     public BNBResult getBnbResult() {

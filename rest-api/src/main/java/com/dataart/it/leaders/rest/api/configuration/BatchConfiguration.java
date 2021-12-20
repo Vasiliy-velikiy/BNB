@@ -90,6 +90,9 @@ Context context;
         sql = FileCopyUtils.copyToString(reader);
         getTemplate().getJdbcTemplate().execute(sql);
 
+        getTemplate().getJdbcTemplate().execute("CREATE TABLE RESPONSE (url VARCHAR(255), code NUMBER)");
+
+
         JobRepositoryFactoryBean factory=new JobRepositoryFactoryBean();
         factory.setTransactionManager(getBatchTransactionManager());
         factory.setIsolationLevelForCreate("ISOLATION_REPEATABLE_READ"); //когда работают несколько джобов одновременно- они не перезаписывают данные
@@ -127,19 +130,7 @@ Context context;
  return new ProccesorForComputed(context);
 }
 
-    @Bean
-    public ItemReader<String> getAdressReader(){
-        return new ReaderAdress();
-    }
-    @Bean
-    public ItemProcessor<String, ServiceResponse>getHealhProcessor(){
-        return new HealhProcessor();
-    }
 
-    @Bean
-    public ItemWriter<ServiceResponse> getAddressWriter(){
-        return new AliveWriter(getTemplate());
-    }
 
     //  создание  степов
         //Обсчет первоначальной перестановки(high, low metric)
@@ -151,6 +142,25 @@ Context context;
                 .build();
     }
         //Опросить health check  у помогающих вычислителей
+
+    @Bean
+    public ItemReader<String> getAdressReader(){
+        return new ReaderAdress();
+    }
+    @Bean
+    public ItemProcessor<String, ServiceResponse>getHealhProcessor(){
+        return new HealhProcessor();
+    }
+
+    @Bean
+    public ItemWriter<ServiceResponse> getAddressWriter(){
+        return new AliveWriter(context);
+    }
+
+
+
+
+
         @Bean
         public Step getStepHealh() throws Exception {
             return getStepFactory().get("step2")
@@ -161,6 +171,27 @@ Context context;
                     .build();
         }
 
+        //отправка перестановки помогающим вычислителям
+
+    @Bean
+    public ItemReader<String> getResponceAndAdressReader(){
+        return new ResponseAndAdressReader();
+    }
+
+    @Bean
+    public ItemProcessor  getClientForDispatch(){
+        return new ClientForDispatchProcessor();
+    }
+
+    @Bean
+    public Step getStepPostPermut() throws Exception {
+        return getStepFactory().get("step3")
+                .<String, ServiceResponse>chunk(1)
+                .reader(getResponceAndAdressReader())
+                .processor(getClientForDispatch())
+                .build();
+    }
+
 
     //создание JOB -1 для главного вычислителя (первоначальная инициализация)
     @Bean
@@ -169,6 +200,7 @@ Context context;
                 .get("Job1")
                 .start(getStepCompute())
                 .next(getStepHealh())
+                .next(getStepPostPermut())
                 .build();
                 
     }

@@ -7,4 +7,5 @@ public interface PermutationService {
     void createInitialPermutation(List<Object> initilPermutation);
 
     void createLowMetric(Long metric);
+
 }
