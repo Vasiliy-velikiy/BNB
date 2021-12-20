@@ -47,11 +47,6 @@ public class BatchConfiguration {
 Context context;
 
 
-    @Bean
-    public JobRegistry jobRegistry() throws Exception {
-        return new MapJobRegistry();
-    }
-
 //1) создать бд (dataSource) для job репозитария на основе h2
     //коннект к БД, инициализируем бд скриптом
     @Bean
@@ -206,9 +201,6 @@ Context context;
     public RunJob getRunJobImpl() throws Exception {
         return new RunJobImpl(getLouncher(),getJobComputedMetric());
     }
-
-
-
 
 
 }
