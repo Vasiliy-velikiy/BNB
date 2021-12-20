@@ -31,7 +31,7 @@ public class AliveWriter implements ItemWriter<ServiceResponse> {
             template.update("INSERT INTO RESPONSE VALUES (:url, :code)",param);
              */
             //вариант записи в поджо класс
-            context.getMapAlive().put("url",response.getUrl());
+            context.getMapAlive().put("url", response.getUrl());
             context.getMapAlive().put("code",response.getResponseCode());
         }
     }

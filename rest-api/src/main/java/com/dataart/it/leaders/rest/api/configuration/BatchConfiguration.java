@@ -157,10 +157,6 @@ Context context;
         return new AliveWriter(context);
     }
 
-
-
-
-
         @Bean
         public Step getStepHealh() throws Exception {
             return getStepFactory().get("step2")

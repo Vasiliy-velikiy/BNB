@@ -9,7 +9,7 @@ public class ServiceResponse {
         this.responseCode = responseCode;
     }
 
-    public Integer getUrl() {
+    public String getUrl() {
         return url;
     }
 
