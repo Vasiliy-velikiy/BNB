@@ -43,8 +43,37 @@ import java.io.Reader;
 @Configuration
 public class BatchConfiguration {
 
-@Autowired
-Context context;
+
+    //задаем начальные параметры лоу хай метрик как 0
+    @Bean
+    public BNBResult getBnbresult() {
+        return new BNBResult(new Branch(), 0l, 0l);
+    }
+
+    //решили что результаты обсчета(лоу хай метрик будем хранить в поджо классе Context)
+    @Bean
+    public Context getContext() {
+        return Context.getInstance(getBnbresult());
+    }
+
+    @Bean
+    public PermitationServiceImp getInitialPermutation() {
+        return new PermitationServiceImp(getContext());
+    }
+
+    //контроллер принимает начальную перестановку и бин который запускает работу(как только пришла первоначальня перестановка-это тригер для запуска процесса обсчета, передачи данных другим вычислителям)
+    @Bean
+    public PermutationController getControllerPermutation() throws Exception {
+        return new PermutationController(getInitialPermutation(), getRunJobImpl());
+    }
+
+    //бин для запуска джобы-запуск только с помощью лаунчера и самой джлбы в который помещены шаги (см бин выше)
+    @Bean
+    public RunJob getRunJobImpl() throws Exception {
+        return new RunJobImpl(getLouncher(),getJobComputedMetric());
+    }
+
+
 
 
 //1) создать бд (dataSource) для job репозитария на основе h2
@@ -122,7 +151,7 @@ Context context;
     //бин процессора на вычисление лоу хай метрики
     @Bean
     public ItemProcessor<BNBResult,BNBResult> getComputeMetric(){
- return new ProccesorForComputed(context);
+ return new ProccesorForComputed(getContext());
 }
 
 
@@ -149,13 +178,13 @@ Context context;
 
     @Bean
     public ItemWriter<ServiceResponse> getAddressWriter(){
-        return new AliveWriter(context);
+        return new AliveWriter(getContext());
     }
 
         @Bean
         public Step getStepHealh() throws Exception {
             return getStepFactory().get("step2")
-                    .<String, ServiceResponse>chunk(3)
+                    .<String, ServiceResponse>chunk(1)
                     .reader(getAdressReader())
                     .processor(getHealhProcessor())
                     .writer(getAddressWriter())
@@ -195,12 +224,5 @@ Context context;
                 .build();
                 
     }
-
-    //бин для запуска джобы-запуск только с помощью лаунчера и самой джлбы в который помещены шаги (см бин выше)
-    @Bean
-    public RunJob getRunJobImpl() throws Exception {
-        return new RunJobImpl(getLouncher(),getJobComputedMetric());
-    }
-
 
 }

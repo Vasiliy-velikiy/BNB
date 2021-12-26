@@ -42,6 +42,7 @@ import java.io.Reader;
 @EnableAutoConfiguration
 public class PermutationControllerTestConfiguration implements WebMvcConfigurer {
 
+
     @Bean
     public RunJob runJob() throws Exception {
         return new RunJobImpl(getLouncher(),getJobComputedMetric());
@@ -136,6 +137,15 @@ public class PermutationControllerTestConfiguration implements WebMvcConfigurer 
         JobLauncher.afterPropertiesSet();
         return JobLauncher;
     }
+
+
+    //бин процессора на вычисление лоу хай метрики
+    @Bean
+    public ItemProcessor<BNBResult,BNBResult> getComputeMetric(){
+        return new ProccesorForComputed(getContext());
+    }
+
+
     //  создание  степов
     //Обсчет первоначальной перестановки(high, low metric)
     @Bean
@@ -204,9 +214,6 @@ public class PermutationControllerTestConfiguration implements WebMvcConfigurer 
                 .build();
 
     }
-    //бин процессора на вычисление лоу хай метрики
-    @Bean
-    public ItemProcessor<BNBResult,BNBResult> getComputeMetric(){
-        return new ProccesorForComputed(getContext());
-    }
+
+
 }
