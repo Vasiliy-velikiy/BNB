@@ -25,7 +25,7 @@ public class TransportLine {
     }
 
     //загрузить кучу деталей
-    public void loadParts(List<Part> parts) {
+    public void loadParts(List<Part> parts) {  //передаем список который хотим загрузить
         AtomicInteger finishTime=new AtomicInteger(0);
         parts.stream().forEach(part-> loadPart(part,finishTime.addAndGet(part.getLastOperationTime())));
     }

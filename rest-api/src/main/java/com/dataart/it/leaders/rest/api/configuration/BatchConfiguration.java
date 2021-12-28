@@ -8,6 +8,7 @@ import com.dataart.it.leaders.rest.api.service.RunJob;
 import com.dataart.it.leaders.rest.api.service.impl.*;
 import com.datart.it.leaders.core.lib.model.bound.BNBResult;
 import com.datart.it.leaders.core.lib.model.branch.Branch;
+import com.datart.it.leaders.core.lib.service.BranchAndBound;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -76,7 +77,7 @@ public class BatchConfiguration {
 
 
 
-//1) создать бд (dataSource) для job репозитария на основе h2
+   //1) создать бд (dataSource) для job репозитария на основе h2
     //коннект к БД, инициализируем бд скриптом
     @Bean
     public DriverManagerDataSource getDataSourse(){
@@ -154,7 +155,13 @@ public class BatchConfiguration {
  return new ProccesorForComputed(getContext());
 }
 
-
+    @Bean
+    public DummyReader getDummyReader(){
+        return new DummyReader();
+    }
+    public DummyWriter getDummyWriter(){
+        return new DummyWriter();
+    }
 
     //  создание  степов
         //Обсчет первоначальной перестановки(high, low metric)
@@ -162,11 +169,13 @@ public class BatchConfiguration {
     public Step getStepCompute() throws Exception {
         return getStepFactory().get("step1")
                 .<BNBResult,BNBResult>chunk(1)
+                .reader(getDummyReader())
                 .processor(getComputeMetric())
+                .writer(getDummyWriter())
                 .build();
     }
-        //Опросить health check  у помогающих вычислителей
 
+        //Опросить health check  у помогающих вычислителей
     @Bean
     public ItemReader<String> getAdressReader(){
         return new ReaderAdress();
@@ -209,8 +218,33 @@ public class BatchConfiguration {
                 .<String, ServiceResponse>chunk(1)
                 .reader(getResponceAndAdressReader())
                 .processor(getClientForDispatch())
+                .writer(getDummyWriter())
                 .build();
     }
+
+
+
+    // шаг-Запустить Branch and bounds расчет начиная с первоначальной перестановки
+   /* @Bean
+    public BranchAndBound getBranchAndBound(){
+        return new BranchAndBound(getContext().getCount());
+    }
+
+    @Bean
+    public ItemProcessor  getProccBranchAndBounds(){
+        return new ProccessorForBranchAndBounds(getContext(),getBranchAndBound());
+    }
+*/
+   /* @Bean
+    public Step getStepBranchAndBounds() throws Exception {
+        return getStepFactory().get("step4")
+                .<String, ServiceResponse>chunk(1)
+                .reader(getDummyReader())
+                .processor(getProccBranchAndBounds())
+                .writer(getDummyWriter())
+                .build();
+    }*/
+
 
 
     //создание JOB -1 для главного вычислителя (первоначальная инициализация)
@@ -221,6 +255,7 @@ public class BatchConfiguration {
                 .start(getStepCompute())
                 .next(getStepHealh())
                 .next(getStepPostPermut())
+               // .next(getStepBranchAndBounds())
                 .build();
                 
     }

@@ -21,7 +21,7 @@ public class ClientForDispatchProcessor implements ItemProcessor<String,BNBResul
         RestTemplate restTemplate=new RestTemplate();
         // объект ответа=ему присваивается значение результата выполнения пост запроса (в параметрах адрес, передаваемый объект, тип возвращаемого значения)
         ResponseEntity<String> response = restTemplate.postForEntity(url, context.getBnbResult(),String.class);
-        //мы должны знать успешно прошла отправка или нет
+        //мы должны знать успешно прошла отправка или нет -тогда возвращаем код ответа, но я пока не хочу
         return null;
     }
 }

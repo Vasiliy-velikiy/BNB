@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
  * Класс для получение ответа от вычислителя-если код 200 значит живой */
 public class HealhProcessor implements ItemProcessor<String, ServiceResponse> {
 
+
     /**адрес который принимает (healthCheck) как описано в контроллере  */
     @Override
     public ServiceResponse process(String url){

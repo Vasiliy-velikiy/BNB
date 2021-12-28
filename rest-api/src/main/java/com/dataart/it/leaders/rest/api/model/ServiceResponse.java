@@ -1,5 +1,5 @@
 package com.dataart.it.leaders.rest.api.model;
-
+/**Класс содержит структуру ответа от вспомогающих вычислителей, когда к ним обращаются живой/не живой*/
 public class ServiceResponse {
     private String url;
     private Integer responseCode;

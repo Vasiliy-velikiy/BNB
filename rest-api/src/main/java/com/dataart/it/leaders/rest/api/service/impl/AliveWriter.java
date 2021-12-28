@@ -22,7 +22,7 @@ public class AliveWriter implements ItemWriter<ServiceResponse> {
 
     @Override
     public void write(List<? extends  ServiceResponse> list) throws Exception {
-        for(ServiceResponse response:list){
+        for(ServiceResponse response:list) {
             //вариант если бы записывали в бд
             /*
             Map<String, Object> param=new HashMap<>();
@@ -31,7 +31,10 @@ public class AliveWriter implements ItemWriter<ServiceResponse> {
             template.update("INSERT INTO RESPONSE VALUES (:url, :code)",param);
              */
             //вариант записи в поджо класс
-            context.getMapAlive().put( response.getUrl(),response.getResponseCode());
+
+            if (response.getResponseCode() == 200) {
+                context.getMapAlive().put(response.getUrl(), response.getResponseCode());
+            }
         }
     }
 }

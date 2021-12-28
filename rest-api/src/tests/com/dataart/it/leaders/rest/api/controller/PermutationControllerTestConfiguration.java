@@ -42,6 +42,7 @@ import java.io.Reader;
 @EnableAutoConfiguration
 public class PermutationControllerTestConfiguration implements WebMvcConfigurer {
 
+/*
 
     @Bean
     public RunJob runJob() throws Exception {
@@ -214,6 +215,7 @@ public class PermutationControllerTestConfiguration implements WebMvcConfigurer 
                 .build();
 
     }
+*/
 
 
 }

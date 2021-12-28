@@ -6,7 +6,7 @@ import javafx.scene.transform.ShearBuilder;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
-
+/**Класс содержит результаты вычислений от главного вычислителя*/
 @Component
 public class Context {
     private BNBResult bnbResult;

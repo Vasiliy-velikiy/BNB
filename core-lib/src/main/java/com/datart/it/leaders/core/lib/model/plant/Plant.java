@@ -61,14 +61,14 @@ public class Plant {
     private Long process() {
         Long metric = 0L;
         //получит минимальное время работы линии(пустые линии не считаем)
-        Integer t = lines.stream().map(line -> line.getWorkTime()).filter(i -> i > 0).min(Integer::compare).get();
+        Integer t = lines.stream().map(line -> line.getWorkTime()).filter(i -> i > 0).min(Integer::compare).get();  //  map()-в данном случае вытягивает в перменную line время работы линии, далее фильтруем и ищем минимум
         //Если все линии пустые-значит закончили обработку всех деталей
         while (t > 0) {
             metric += t;
-            //поработать время t и выгрузить делати на транспортер
-            for (AssemblingLine line : lines) {
-                if (line.getWorkTime()>0) {
-                    transportLine.loadParts(line.Process(t));
+            //поработать время t и выгрузить детали на транспортер
+            for (AssemblingLine line : lines) {//проводим итерацию по всем производсвтенным линиям
+                if (line.getWorkTime()>0) { // если у текущей линии очередь из времени деталей на выполнение >0 (
+                    transportLine.loadParts(line.Process(t));         //значит загружаем траснпортную линию деталями которые успели обработать на данном станке
                 }
             }
             //Загрузить детали с транспортера на линии

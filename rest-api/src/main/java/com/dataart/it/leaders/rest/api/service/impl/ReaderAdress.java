@@ -37,7 +37,7 @@ public class ReaderAdress implements ItemReader<String> {
        String key= iterator.next();
        String retval=null;
        if(key!=null) {
-         retval=properties.getProperty(iterator.next()); //когда итератор вернет null-значит дошел до конца
+         retval=properties.getProperty(key); //когда итератор вернет null-значит дошел до конца
        }
         return retval;
     }

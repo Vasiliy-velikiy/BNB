@@ -16,8 +16,8 @@ public class PartType {
         return id;
     }
 
-    public Optional<Work> getWork(Integer pos) {
-        Work retval = null;
+    public Optional<Work> getWork(Integer pos) {  //так как у каждого типа детали есть опр список операций ( через сколько и каких линий должна пройти деталь чтобы быть готовой)
+        Work retval = null;                         // метод получения конкретной операции(работы) по определнной позиции в очереди
         if (pos >= 0 && pos <= workflow.length-1) {
             retval = workflow[pos];
         }

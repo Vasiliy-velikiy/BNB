@@ -2,7 +2,7 @@ package com.datart.it.leaders.core.lib.model.plant;
 
 import java.util.Optional;
 
-public class Part {
+public class Part {             //каждая деталь на заводе имеет определнный тип , айди, время обработки и текущую позицию
     private final Integer id;
     private final PartType partType;
     private Integer workTime;
@@ -11,8 +11,8 @@ public class Part {
     public Part(Integer id, PartType partType) {
         this.id = id;
         this.partType = partType;
-        curpos = 0;
-        partType.getWork(curpos).ifPresent(work -> {
+        curpos = 0;                     //ifPresent-Если значение присутствует, вызвать указанного потребителя со значением,* в противном случае ничего не делать.
+        partType.getWork(curpos).ifPresent(work -> {   //у типа детали (например шар) я вынимаю текущую работу по позиции 0 если она существует,и получаю у этой работы время
             this.workTime = work.getTime();
         });
 
