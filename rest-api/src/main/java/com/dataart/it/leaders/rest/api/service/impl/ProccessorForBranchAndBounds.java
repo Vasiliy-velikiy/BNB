@@ -16,15 +16,17 @@ public class ProccessorForBranchAndBounds implements ItemProcessor<Context,Conte
     public ProccessorForBranchAndBounds() {
     }
 
+
     public ProccessorForBranchAndBounds(Context context, BranchAndBound branchAndBound) {
         this.context = context;
         this.branchAndBound = branchAndBound;
     }
 
-    @Override
-    public Context process(Context o) throws Exception {
-        //т.к контекст -класс для результатов моих вычислений, оттуда я вынимаю перестановку, обсчитываю методом process (ветви и границы) и возвращаю результат в контекст
-     context.setBnbResult(branchAndBound.process(o.getBnbResult().getBranch(),o.getBnbResult().gethMetric()));
-     return context;
+        @Override
+        public Context process (Context o) throws Exception {
+            //т.к контекст -класс для результатов моих вычислений, оттуда я вынимаю перестановку, обсчитываю методом process (ветви и границы) и возвращаю результат в контекст
+            context.setBnbResult(branchAndBound.process(o.getBnbResult().getBranch(), o.getBnbResult().gethMetric()));
+            return context;
+        }
     }
-}
+

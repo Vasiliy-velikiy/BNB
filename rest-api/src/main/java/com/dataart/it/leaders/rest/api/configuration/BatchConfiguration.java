@@ -225,7 +225,7 @@ public class BatchConfiguration {
 
 
     // шаг-Запустить Branch and bounds расчет начиная с первоначальной перестановки
-   /* @Bean
+    @Bean
     public BranchAndBound getBranchAndBound(){
         return new BranchAndBound(getContext().getCount());
     }
@@ -234,16 +234,24 @@ public class BatchConfiguration {
     public ItemProcessor  getProccBranchAndBounds(){
         return new ProccessorForBranchAndBounds(getContext(),getBranchAndBound());
     }
-*/
-   /* @Bean
+    @Bean
+    public ItemReader getDummyReaderForBounds(){
+        return new DummyReaderForBounds();
+    }
+    @Bean
+    public ItemWriter getDummyWriterForBounds(){
+        return new DummyWriterForBounds();
+    }
+
+    @Bean
     public Step getStepBranchAndBounds() throws Exception {
         return getStepFactory().get("step4")
                 .<String, ServiceResponse>chunk(1)
-                .reader(getDummyReader())
+                .reader(getDummyReaderForBounds())
                 .processor(getProccBranchAndBounds())
-                .writer(getDummyWriter())
+                .writer(getDummyWriterForBounds())
                 .build();
-    }*/
+    }
 
 
 

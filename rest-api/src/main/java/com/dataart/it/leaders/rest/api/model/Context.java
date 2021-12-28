@@ -39,18 +39,20 @@ public class Context {
         return count;
     }
 
-    //синглтон
-    public static Context getInstance(BNBResult bnbResult) {
-        if(instance==null){
-            instance= new Context(bnbResult);
-        }
-        return instance;
-    }
+
     public void setBnbResult(BNBResult bnbResult) {
         this.bnbResult = bnbResult;
     }
 
     public void setCount(Integer count) {
         this.count = count;
+    }
+
+    //синглтон
+    public static Context getInstance(BNBResult bnbResult) {
+        if(instance==null){
+            instance= new Context(bnbResult);
+        }
+        return instance;
     }
 }
