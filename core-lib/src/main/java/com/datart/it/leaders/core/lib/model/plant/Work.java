@@ -1,5 +1,5 @@
 package com.datart.it.leaders.core.lib.model.plant;
-
+/**Класс описывает работу и время для конкретной детали на конкретной сборочной линии*/
 public class Work {
     private Integer line; //линия
     private Integer time;//время обработки

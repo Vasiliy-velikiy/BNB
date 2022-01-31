@@ -1,7 +1,7 @@
 package com.datart.it.leaders.core.lib.model.plant;
 
 import java.util.Optional;
-
+/**Класс- деталь загружаемая на сборочную линию*/
 public class Part {             //каждая деталь на заводе имеет определнный тип , айди, время обработки и текущую позицию
     private final Integer id;
     private final PartType partType;

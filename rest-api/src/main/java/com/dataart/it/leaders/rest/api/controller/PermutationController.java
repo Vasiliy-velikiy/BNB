@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 
-
+/**Контроллер для создания последовательности элементов*/
 @RestController
 public class PermutationController {
 

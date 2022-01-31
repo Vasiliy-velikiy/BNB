@@ -3,7 +3,8 @@ package com.datart.it.leaders.core.lib.model.bound;
 import com.datart.it.leaders.core.lib.model.branch.Branch;
 
 import java.util.List;
-
+/**Класс хранит значения перестановки( количество элементов в определенном порядке, и метрики-точки контроля для отсечения заведомо
+ * больших резльтатов*/
 public class BNBResult {
     private Branch branch;
     private Long lMetric;

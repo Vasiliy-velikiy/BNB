@@ -2,7 +2,7 @@ package com.datart.it.leaders.core.lib.model.plant;
 
 import java.util.List;
 import java.util.Optional;
-
+/**Класс-тип детали. У каждого класса детали есть тип детали (квадрат, ромб, треугольник и тд*/
 public class PartType {
     private final Integer id; //индентификатор типа
     private final Work[] workflow; //порядок и время обработки детали.( через сколько и каких линий должна пройти деталь чтобы быть готовой)

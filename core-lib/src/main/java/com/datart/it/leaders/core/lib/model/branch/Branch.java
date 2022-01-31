@@ -3,14 +3,14 @@ package com.datart.it.leaders.core.lib.model.branch;
 
 import java.util.LinkedList;
 import java.util.List;
-
+/**Класс описывает определенную последоваетльность элементов- элементы загружаются в оперделеном порядке на сборочную линию*/
 public class Branch {
 
     private List<Object> sequence;
     private Integer base;
     private Integer forkPointer;
 
-    // Конструкторы пишут вначале, чтобы не бегать по коду и не искать как сделать объект
+
     public Branch(){
        this.sequence =new LinkedList<>();
     }

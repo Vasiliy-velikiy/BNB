@@ -5,7 +5,7 @@ import com.datart.it.leaders.core.lib.model.branch.Branch;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-
+/**Класс-завод , в котором находятся сборочные линии и транспортировочные линии*/
 public class Plant {
 
     private List<AssemblingLine> lines;   //список станков или производственных линий
@@ -19,7 +19,7 @@ public class Plant {
             lines.add(new AssemblingLine(i));
         }
     }
-
+//метод вычисляет высшую границу для контроля
     public Long highMetric(Branch branch) {
         clearLines();
         Integer base = branch.getBase();
@@ -35,6 +35,7 @@ public class Plant {
         return process();
     }
 
+    //метод вычисляет низшую границу для контроля
     public Long lowMetric(Branch branch) {
         clearLines();
         List<Part> subList = branch
@@ -47,12 +48,13 @@ public class Plant {
         return process();
     }
 
+    //метод -запуск деталей на линии
     private void transport() {
         transportLine.unloadAll().stream().forEach(part -> {
             lines.get(part .getLine()).addPart(part);
         });
     }
-
+//очистить линии
     private void clearLines() {
         lines.stream().forEach(line -> line.getLine().clear());
     }

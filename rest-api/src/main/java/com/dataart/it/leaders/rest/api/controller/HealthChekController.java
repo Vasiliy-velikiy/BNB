@@ -3,7 +3,7 @@ package com.dataart.it.leaders.rest.api.controller;
 import com.dataart.it.leaders.rest.api.service.HealthCheck;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+/**Контроллер для опрашивания модели- живой или не живой элемент*/
 @RestController
 public class HealthChekController {
 

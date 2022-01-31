@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
+/**Класс для восстановления последовательности элементов по факториальному числу*/
 public class PermutationFactory {
 
     private final List<Object> originalValue;

@@ -5,7 +5,7 @@ import com.datart.it.leaders.core.lib.model.branch.Branch;
 import com.datart.it.leaders.core.lib.model.plant.Plant;
 
 import java.util.Stack;
-
+/**Класс для вычисления оптимальной перестановки методом ветвей и грнаиц*/
 public class BranchAndBound {
 
     private Stack<BNBResult> stack;

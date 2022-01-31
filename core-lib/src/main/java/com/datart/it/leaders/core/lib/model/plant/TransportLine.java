@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+/**Класс-траснопртировочная линия*/
 public class TransportLine {
     private List<TransportBox> boxes;
 

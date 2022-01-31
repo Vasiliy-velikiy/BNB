@@ -3,7 +3,7 @@ package com.dataart.it.leaders.rest.api.controller;
 import com.dataart.it.leaders.rest.api.service.MetricUpdate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+/**Контроллер для обнавления значений метрики-точек контроля*/
 @RestController
 public class UpdateMetricController {
 

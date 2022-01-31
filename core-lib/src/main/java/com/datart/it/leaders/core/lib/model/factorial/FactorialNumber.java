@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
+/**номера последователностей элементов передаются в виде факториального числа*/
 public class FactorialNumber {
     /**
      * факториальное число,хранится в структуре данных LinkedList
